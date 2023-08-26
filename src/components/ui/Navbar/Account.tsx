@@ -10,6 +10,8 @@ import ToggleButton from "@/components/ToggleButton/ToggleButton";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { useCookies } from "react-cookie";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
+import { Link } from "react-router-dom";
+import BrandButton from "@/components/BrandButton/BrandButton";
 
 type AccountProps = {
   setAccountDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,15 +42,23 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
             darkMode ? "after:bg-white" : "after:bg-primary"
           }`}
         >
-          <Icon icon="gg:profile" width={32} className="mx-auto" />
+          <img
+            src={user?.imageUrl}
+            alt=""
+            className="w-16 h-16 rounded-full mx-auto"
+          />
+
           <h2
-            className={`text-lg font-bold text-center my-3 ${
+            className={`text-lg font-bold text-center my-2 ${
               darkMode ? "text-white" : "text-gray-700"
             }`}
           >
             {" "}
             {user?.name?.firstName} {user?.name?.lastName}
           </h2>
+          <Link to="" className="flex justify-center mb-2">
+            <BrandButton text="View Profile" />
+          </Link>
         </div>
         <ul
           className="py-2 text-base text-gray-700"
