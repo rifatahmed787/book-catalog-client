@@ -35,7 +35,7 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
 
   return (
     <>
-      <li className="">
+      <li className="overflow-y-auto">
         {/* user profile */}
         <div
           className={`relative after:absolute after:content-normal after:w-full after:h-0.5  ${
@@ -49,7 +49,7 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
           />
 
           <h2
-            className={`text-lg font-bold text-center my-2 ${
+            className={`text-lg font-bold text-center my-1 ${
               darkMode ? "text-white" : "text-gray-700"
             }`}
           >
@@ -68,7 +68,7 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
           <li>
             <a
               href="#"
-              className={`px-4 py-2 mt-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
+              className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
                 darkMode ? "text-white" : "hover:bg-gray-100"
               }`}
               onClick={() => setAccountDropdownOpen(false)}
@@ -82,7 +82,7 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
           <li>
             <a
               href="#"
-              className={`px-4 py-2 mt-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
+              className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
                 darkMode ? "text-white" : "hover:bg-gray-100"
               }`}
             >
@@ -95,7 +95,7 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
           <li>
             <a
               href="#"
-              className={`px-4 py-2 mt-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
+              className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
                 darkMode ? "text-white" : "hover:bg-gray-100"
               }`}
             >
@@ -107,11 +107,24 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
             </a>
           </li>
 
+          {/* reading list */}
+          <li>
+            <a
+              href="#"
+              className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
+                darkMode ? "text-white" : "hover:bg-gray-100"
+              }`}
+            >
+              <Icon icon="fluent-mdl2:reading-mode" width={20} />
+              Reading List
+            </a>
+          </li>
+
           {/* checkout */}
           <li>
             <a
               href="#"
-              className={`px-4 py-2 mt-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
+              className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
                 darkMode ? "text-white" : "hover:bg-gray-100"
               }`}
             >
@@ -124,7 +137,7 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
           <li>
             <a
               href="#"
-              className={`px-4 py-2 mt-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
+              className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
                 darkMode ? "text-white" : "hover:bg-gray-100"
               }`}
             >
@@ -133,6 +146,7 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
             </a>
           </li>
         </ul>
+
         {/* Language change button  */}
 
         <label className="cursor-pointer">
@@ -158,7 +172,7 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
         <ToggleButton />
         <button
           onClick={handleLogout}
-          className={`px-4 py-2 mt-2 text-base w-full text-left text-gray-700    flex items-center gap-2 ${
+          className={`px-4 py-2 text-base w-full text-left text-gray-700    flex items-center gap-2 ${
             darkMode ? "text-white" : "hover:bg-gray-100"
           }`}
         >

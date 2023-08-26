@@ -7,7 +7,7 @@ const ToggleButton = () => {
   const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   return (
-    <label className="flex items-center cursor-pointer px-4 mt-5 gap-2">
+    <label className="flex items-center cursor-pointer px-4 my-2 gap-2">
       <div>
         <Icon
           icon={darkMode ? "ph:moon" : "ph:sun"}
