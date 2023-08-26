@@ -32,3 +32,36 @@
   animation-duration: 0.8s;
   animation-timing-function: ease-in-out;
 }
+
+@keyframes scroll-top {
+  0% {
+    transform: translateY(-25px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.droptop-menu {
+  animation-name: scroll-top;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
+}
+
+/* bottom border for menu changing */
+.menu-item {
+  cursor: pointer;
+  transition: border-bottom 0.3s ease-in-out;
+  border-bottom: 2px solid transparent;
+}
+
+.menu-item:hover {
+  border-bottom: 2px solid white;
+}
+
+.menu-item.active {
+  border-bottom: 2px solid white;
+  animation: 0.3s ease-in-out;
+}

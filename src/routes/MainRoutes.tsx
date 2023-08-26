@@ -12,6 +12,7 @@ import BookDetails from "@/pages/BookDetails";
 import EditBook from "@/pages/EditBook";
 import WishList from "@/pages/WishList";
 import ReadingList from "@/pages/ReadingList";
+import Contact from "@/pages/Contact";
 
 export const AllRoutes = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const AllRoutes = createBrowserRouter([
       {
         path: "/books",
         element: <Books />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/books/:bookID",
