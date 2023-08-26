@@ -32,7 +32,7 @@ const SignUpForm = () => {
       // Set the file in the uploader mutation
       try {
         const response = await uploader({
-          data: selectedFile, // Send the selected file as the data
+          data: selectedFile,
         });
 
         // Handle the response as needed
@@ -110,13 +110,15 @@ const SignUpForm = () => {
     <div className="min-h-screen w-full    bg-box-pattern  flex items-center justify-center ">
       <form
         onSubmit={formSubmitHandler}
-        className=" relative flex  max-w-lg rounded-xl w-full  flex-col gap-4 bg-[#FFFFFF] px-[74px] py-12 "
+        className=" relative flex  max-w-lg rounded-xl w-full  flex-col gap-4 backdrop-blur-3xl bg-white/80 mx-5 px-5 md:px-[74px] py-7"
       >
         {/* title */}
         <div className="flex items-center justify-between gap-3 flex-wrap ">
-          <h1 className=" text-4xl  font-anton text-ceter ">Signup</h1>
+          <h1 className=" text-4xl  font-anton text-ceter text-primary">
+            Signup
+          </h1>
 
-          <Link to={"/"} className="flex items-center  gap-2 ">
+          <Link to={"/"} className="flex items-center text-primary gap-2 ">
             {ICONS.home} Back to home
           </Link>
         </div>
