@@ -6,6 +6,7 @@
 top nav and swiper css
 -----------------------------*/
 
+/* top nav css animation start */
 .top-nav-text {
   display: inline-block;
   overflow: hidden;
@@ -76,89 +77,10 @@ top nav and swiper css
     width: 355px;
   }
 }
+/* top nav css animation start */
 
-/* ####### Header - Navbar CSS Style ####### */
-@keyframes dropdown {
-  0% {
-    transform: translateY(-25px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.dropdown-menu {
-  animation-name: dropdown;
-  animation-duration: 0.8s;
-  animation-timing-function: ease-in-out;
-}
-.shake2 {
-  animation: shake2 1s infinite;
-}
-@keyframes shake2 {
-  0% {
-    transform: translate(3px, 0);
-  }
-  50% {
-    transform: translate(-3px, 0);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-@-moz-keyframes shake2 {
-  0% {
-    -moz-transform: translate(3px, 0);
-  }
-  50% {
-    -moz-transform: translate(-3px, 0);
-  }
-  100% {
-    -moz-transform: translate(0, 0);
-  }
-}
-
-@-webkit-keyframes shake2 {
-  0% {
-    -webkit-transform: translate(3px, 0);
-  }
-  50% {
-    -webkit-transform: translate(-3px, 0);
-  }
-  100% {
-    -webkit-transform: translate(0, 0);
-  }
-}
-
-@-ms-keyframes shake2 {
-  0% {
-    -ms-transform: translate(3px, 0);
-  }
-  50% {
-    -ms-transform: translate(-3px, 0);
-  }
-  100% {
-    -ms-transform: translate(0, 0);
-  }
-}
-
-@-o-keyframes shake2 {
-  0% {
-    -o-transform: translate(3px, 0);
-  }
-  50% {
-    -o-transform: translate(-3px, 0);
-  }
-  100% {
-    -o-transform: translate(0, 0);
-  }
-}
-
-/* ####### Banner Carousel CSS style #######*/
-.swiper-pagination-bullet {
+/* Banner swiper Carousel CSS style */
+/* .swiper-pagination-bullet {
   width: 20px !important;
   height: 20px !important;
   background-color: #1d1f20 !important;
@@ -166,7 +88,8 @@ top nav and swiper css
 .swiper-pagination-bullet-active {
   background-color: #27477d !important;
   border: 2px solid #00accf !important;
-}
+} */
+
 .swiper-button-next,
 .swiper-button-prev {
   --swiper-navigation-color: #1d1f20 !important;
