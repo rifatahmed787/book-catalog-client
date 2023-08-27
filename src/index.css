@@ -1,3 +1,314 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*--------------------------- 
+top nav and swiper css
+-----------------------------*/
+
+.top-nav-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.top-nav-text:first-of-type {
+  animation: showup 7s infinite;
+}
+
+.top-nav-text:last-of-type {
+  width: 0px;
+  animation: reveal 7s infinite;
+}
+
+.top-nav-text:last-of-type span {
+  margin-left: -355px;
+  animation: slidein 7s infinite;
+  text-align: center;
+}
+
+@keyframes showup {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: -800px;
+  }
+  20% {
+    margin-left: -800px;
+  }
+  35% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+  20% {
+    opacity: 1;
+    width: 0px;
+  }
+  30% {
+    width: 355px;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
+}
+
+/* ####### Header - Navbar CSS Style ####### */
+@keyframes dropdown {
+  0% {
+    transform: translateY(-25px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dropdown-menu {
+  animation-name: dropdown;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
+}
+.shake2 {
+  animation: shake2 1s infinite;
+}
+@keyframes shake2 {
+  0% {
+    transform: translate(3px, 0);
+  }
+  50% {
+    transform: translate(-3px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@-moz-keyframes shake2 {
+  0% {
+    -moz-transform: translate(3px, 0);
+  }
+  50% {
+    -moz-transform: translate(-3px, 0);
+  }
+  100% {
+    -moz-transform: translate(0, 0);
+  }
+}
+
+@-webkit-keyframes shake2 {
+  0% {
+    -webkit-transform: translate(3px, 0);
+  }
+  50% {
+    -webkit-transform: translate(-3px, 0);
+  }
+  100% {
+    -webkit-transform: translate(0, 0);
+  }
+}
+
+@-ms-keyframes shake2 {
+  0% {
+    -ms-transform: translate(3px, 0);
+  }
+  50% {
+    -ms-transform: translate(-3px, 0);
+  }
+  100% {
+    -ms-transform: translate(0, 0);
+  }
+}
+
+@-o-keyframes shake2 {
+  0% {
+    -o-transform: translate(3px, 0);
+  }
+  50% {
+    -o-transform: translate(-3px, 0);
+  }
+  100% {
+    -o-transform: translate(0, 0);
+  }
+}
+
+/* ####### Banner Carousel CSS style #######*/
+.swiper-pagination-bullet {
+  width: 20px !important;
+  height: 20px !important;
+  background-color: #1d1f20 !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #27477d !important;
+  border: 2px solid #00accf !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-color: #1d1f20 !important;
+}
+
+@media only screen and (max-width: 640px) {
+  .carousel-appoint-btn {
+    padding: 0 10px;
+  }
+  .carousel-seemore-btn {
+    padding: 0 16px;
+  }
+  .carousel-top-space {
+    top: 50%;
+  }
+  .carousel-h1-tag {
+    font-size: 20px;
+  }
+}
+
+.content__container__list {
+  position: absolute;
+  list-style-type: none;
+  margin-left: 43%;
+  animation-name: trans;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  margin-top: 0px;
+}
+@keyframes opacity {
+  0%,
+  50% {
+    opacity: 0;
+    color: #1d1f20;
+  }
+}
+@keyframes trans {
+  0%,
+  14.66% {
+    transform: translateY(0%);
+  }
+  16.66%,
+  31.32% {
+    transform: translateY(-25%);
+  }
+  33.32%,
+  47.98% {
+    transform: translateY(-50%);
+  }
+  49.98%,
+  64.64% {
+    transform: translateY(-75%);
+  }
+  66.64%,
+  81.30% {
+    transform: translateY(-50%);
+  }
+  83.30%,
+  97.96% {
+    transform: translateY(-25%);
+  }
+}
+.changing h1 span::before {
+  content: "";
+  color: #27477d;
+  animation: profile 5s infinite;
+}
+@keyframes profile {
+  0% {
+    content: "Dental Bonding";
+  }
+  50% {
+    content: "Teeth Cleanings";
+  }
+  100% {
+    content: "Root Canal Therapy";
+  }
+}
+/* ####### Banner Background Image ####### */
+.bannerBG-1 {
+  background-image: url("./assets/background/bannerBg/banner-bg-1.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 600px) {
+  .bannerBG-1 {
+    background-image: url("./assets/background/bannerBg/mobile-banner-bg-1.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+.bannerBG-2 {
+  background-image: url("./assets/background/bannerBg/banner-bg-2.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 600px) {
+  .bannerBG-2 {
+    background-image: url("./assets/background/bannerBg/mobile-banner-bg-1.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+/* doctorlistcard css */
+.doctorListBG {
+  background-image: url("./assets/slider/slider (3).jpeg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.blue:hover {
+  background: blue;
+}
+
+.green:hover {
+  background: green;
+}
+
+.red:hover {
+  background: red;
+}
+.colorChange:hover {
+  background-color: blueviolet;
+}
+
+.banner-zoom {
+  animation: slideInRight 0.5s forwards;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
