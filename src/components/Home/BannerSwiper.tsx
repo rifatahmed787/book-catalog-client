@@ -1,28 +1,19 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import SwiperCore, {
-  Autoplay,
-  EffectFade,
-  Navigation,
-  Pagination,
-} from "swiper";
-import banner1 from "../../assets/banner/banner1.jpg";
-import banner2 from "../../assets/banner/banner2.jpg";
-import banner3 from "../../assets/banner/banner3.jpg";
-
-// Import Swiper modules
-SwiperCore.use([Autoplay, EffectFade, Navigation, Pagination]);
+import { Autoplay, EffectFade, Navigation } from "swiper/modules";
+import BrandButton from "../BrandButton/BrandButton";
+import WhiteButton from "../BrandButton/WhiteButton";
 
 const BannerSwiper = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const textRef = useRef(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
 
-  const handleSlideChange = (swiper: { activeIndex: any }) => {
+  const handleSlideChange = (swiper: { activeIndex: number }) => {
     const currentIndex = swiper.activeIndex;
     setActiveSlideIndex(currentIndex);
 
@@ -48,230 +39,109 @@ const BannerSwiper = () => {
         onSlideChange={handleSlideChange}
         onTransitionEnd={handleTransitionEnd}
         className="mySwiper"
+        modules={[Autoplay, EffectFade, Navigation]}
       >
         {/* Slide 1 */}
         <SwiperSlide>
-          <div className="bg-white">
-            <div className="bannerBG-1 md:h-[75vh] h-screen flex items-end">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* Left Side: Text Area */}
-                <div className="flex py-10 items-center justify-center md:justify-start px-10 md:px-20">
-                  <div>
-                    <h3
-                      ref={textRef}
-                      className={`text-white font-light text-xl md:text-2xl text-center md:text-start ${
-                        activeSlideIndex === 0 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      Welcome to Werro Dental Clinic
-                    </h3>
-                    <h1
-                      ref={textRef}
-                      className={`text-2xl md:text-6xl text-center md:text-start font-bold bg-third text-white p-3 md:p-5 my-3 md:my-5 md:w-3/4 ${
-                        activeSlideIndex === 0 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      Let's Perfect Smile
-                    </h1>
-                    <h1
-                      ref={textRef}
-                      className={`text-2xl md:text-6xl text-center md:text-start font-bold bg-third text-white p-3 md:p-5 my-3 md:my-5 ${
-                        activeSlideIndex === 0 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      Caring with your teeth
-                    </h1>
+          <div className="bannerBG-1 md:h-[75vh] h-screen flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-20 after:h-full after:w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 z-10">
+              {/* Left Side: Text Area */}
+              <div className="flex py-10 items-center justify-center md:justify-start px-10 md:px-20">
+                <div>
+                  <h1
+                    ref={textRef}
+                    className={`text-2xl md:text-4xl text-center md:text-start font-bold bg-third text-white p-3 md:px-5 mb-3  ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
+                  >
+                    Today a <span className="text-primary">reader, </span>
+                    tomorrow a <span className="text-primary">leader.</span>
+                  </h1>
 
-                    <article
-                      ref={textRef}
-                      className={`md:text-white text-black text-base text-center md:text-start md:text-xl font-extralight ${
-                        activeSlideIndex === 0 ? "banner-zoom" : ""
-                      }`}
+                  <article
+                    ref={textRef}
+                    className={`md:text-white md:p-5 text-black text-base text-center md:text-start md:text-xl font-extralight ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
+                  >
+                    “The more that you read, the more things you will know. The
+                    more that you learn, the more places you'll go.” “Books are
+                    a uniquely portable magic.” “I kept always two books in my
+                    pocket, one to read, one to write in.”
+                  </article>
+                  {/* Button: Booking Now & Details More */}
+                  <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-start">
+                    <div
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
                     >
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Vero aspernatur voluptates pariatur assumenda voluptatem
-                      ducimus debitis minima quo deserunt ipsum!
-                    </article>
-                    {/* Button: Booking Now & Details More */}
-                    <div className="my-5 flex justify-center md:justify-start">
-                      <div
-                        data-aos="fade-up"
-                        data-aos-anchor-placement="bottom-bottom"
-                      >
-                        <Link to="#">
-                          <button className="bg-secondary text-white md:text-xl hover:skew-y-6 duration-300 px-3 py-2 mr-5 rounded-full">
-                            Booking Now
-                          </button>
-                        </Link>
-                      </div>
-                      <div
-                        data-aos="fade-up"
-                        data-aos-anchor-placement="bottom-bottom"
-                      >
-                        <Link to="#">
-                          <button className="bg-white text-secondary font-bold md:text-xl hover:skew-y-6 duration-300 px-3 py-2 rounded-full">
-                            Details More
-                          </button>
-                        </Link>
-                      </div>
+                      <Link to="/">
+                        <BrandButton text="Buy Now >>" />
+                      </Link>
+                    </div>
+                    <div
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
+                    >
+                      <Link to="#">
+                        <WhiteButton text="Read Now →" />
+                      </Link>
                     </div>
                   </div>
-                </div>
-                {/* Right side: Banner Slider Image */}
-                <div>
-                  <img src={banner1} alt="banner photo" className="w-full" />
                 </div>
               </div>
             </div>
           </div>
         </SwiperSlide>
-
         {/* Slide 2 */}
-        <SwiperSlide>
-          <div className="bg-white">
-            <div className="bannerBG-2 md:h-[75vh] h-screen flex items-end">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* Left side: Banner Slider Image */}
-                <div className="md:mt-14 order-2 md:order-1">
-                  <img src={banner2} alt="banner photo" className="w-full" />
-                </div>
-                {/* Right Side: Text Area */}
-                <div className="flex order-1 md:order-2 py-10 items-center justify-center md:justify-end px-10 md:px-20">
-                  <div className="md:pl-10">
-                    <h3
-                      ref={textRef}
-                      className={`text-white font-light text-xl md:text-2xl text-center md:text-start ${
-                        activeSlideIndex === 1 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      Welcome to Werro Dental Clinic
-                    </h3>
-                    <h1
-                      ref={textRef}
-                      className={`text-2xl md:text-6xl text-center md:text-start font-bold bg-third text-white p-3 md:p-5 my-3 md:my-5 md:w-3/4 ${
-                        activeSlideIndex === 1 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      Let's Perfect Smile
-                    </h1>
-                    <h1
-                      ref={textRef}
-                      className={`text-2xl md:text-6xl text-center md:text-start font-bold bg-third text-white p-3 md:p-5 my-3 md:my-5 ${
-                        activeSlideIndex === 1 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      Caring with your teeth
-                    </h1>
 
-                    <article
-                      ref={textRef}
-                      className={`md:text-white text-black text-base text-center md:text-start md:text-xl font-extralight ${
-                        activeSlideIndex === 1 ? "banner-zoom" : ""
-                      }`}
+        <SwiperSlide>
+          <div className="bannerBG-2 md:h-[75vh] h-screen flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-20 after:h-full after:w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {/* Right Side: Text Area */}
+              <div className="flex order-1 md:order-2 py-10 items-center justify-center md:justify-end px-10 md:px-20">
+                <div className="md:pl-10">
+                  <h1
+                    ref={textRef}
+                    className={`text-2xl md:text-4xl text-center md:text-start font-bold bg-third text-white p-3 md:px-5 mb-3  ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
+                  >
+                    A reader lives a{" "}
+                    <span className="text-primary">thousand </span>
+                    lives before he <span className="text-primary">dies.</span>
+                  </h1>
+
+                  <article
+                    ref={textRef}
+                    className={`md:text-white md:p-5 text-black text-base text-center md:text-start md:text-xl font-extralight ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
+                  >
+                    “The more that you read, the more things you will know. The
+                    more that you learn, the more places you'll go.” “Books are
+                    a uniquely portable magic.” “I kept always two books in my
+                    pocket, one to read, one to write in.”
+                  </article>
+                  {/* Button: Booking Now & Details More */}
+                  <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-start">
+                    <div
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
                     >
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Vero aspernatur voluptates pariatur assumenda voluptatem
-                      ducimus debitis minima quo deserunt ipsum!
-                    </article>
-                    {/* Button: Booking Now & Details More */}
-                    <div className="my-5 flex justify-center md:justify-start">
-                      <div
-                        data-aos="fade-up"
-                        data-aos-anchor-placement="bottom-bottom"
-                      >
-                        <Link to="#">
-                          <button className="bg-secondary text-white md:text-xl hover:skew-y-6 duration-300 px-3 py-2 mr-5 rounded-full">
-                            Booking Now
-                          </button>
-                        </Link>
-                      </div>
-                      <div
-                        data-aos="fade-up"
-                        data-aos-anchor-placement="bottom-bottom"
-                      >
-                        <Link to="#">
-                          <button className="bg-white text-secondary font-bold md:text-xl hover:skew-y-6 duration-300 px-3 py-2 rounded-full">
-                            Details More
-                          </button>
-                        </Link>
-                      </div>
+                      <Link to="/">
+                        <BrandButton text="Buy Now >>" />
+                      </Link>
+                    </div>
+                    <div
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
+                    >
+                      <Link to="#">
+                        <WhiteButton text="Read Now →" />
+                      </Link>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
-
-        {/* Slide 3 */}
-        <SwiperSlide>
-          <div className="bg-white">
-            <div className="bannerBG-1 md:h-[75vh] h-screen flex items-end">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* Left Side: Text Area */}
-                <div className="flex py-10 items-center justify-center md:justify-start px-10 md:px-20">
-                  <div>
-                    <h3
-                      ref={textRef}
-                      className={`text-white font-light text-xl md:text-2xl text-center md:text-start ${
-                        activeSlideIndex === 2 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      Welcome to Werro Dental Clinic
-                    </h3>
-                    <h1
-                      ref={textRef}
-                      className={`text-2xl md:text-6xl text-center md:text-start font-bold bg-third text-white p-3 md:p-5 my-3 md:my-5 md:w-3/4 ${
-                        activeSlideIndex === 2 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      Let's Perfect Smile
-                    </h1>
-                    <h1
-                      ref={textRef}
-                      className={`text-2xl md:text-6xl text-center md:text-start font-bold bg-third text-white p-3 md:p-5 my-3 md:my-5 ${
-                        activeSlideIndex === 2 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      Caring with your teeth
-                    </h1>
-
-                    <article
-                      ref={textRef}
-                      className={`md:text-white text-black text-base text-center md:text-start md:text-xl font-extralight ${
-                        activeSlideIndex === 2 ? "banner-zoom" : ""
-                      }`}
-                    >
-                      LHEllo Akashd
-                    </article>
-                    {/* Button: Booking Now & Details More */}
-                    <div className="my-5 flex justify-center md:justify-start">
-                      <div
-                        data-aos="fade-up"
-                        data-aos-anchor-placement="bottom-bottom"
-                      >
-                        <Link to="#">
-                          <button className="bg-secondary text-white md:text-xl hover:skew-y-6 duration-300 px-3 py-2 mr-5 rounded-full">
-                            Booking Now
-                          </button>
-                        </Link>
-                      </div>
-                      <div
-                        data-aos="fade-up"
-                        data-aos-anchor-placement="bottom-bottom"
-                      >
-                        <Link to="#">
-                          <button className="bg-white text-secondary font-bold md:text-xl hover:skew-y-6 duration-300 px-3 py-2 rounded-full">
-                            Details More
-                          </button>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Right side: Banner Slider Image */}
-                <div>
-                  <img src={banner3} alt="banner photo" className="w-full" />
                 </div>
               </div>
             </div>

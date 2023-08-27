@@ -170,21 +170,21 @@ top nav and swiper css
 }
 /* ####### Banner Background Image ####### */
 .bannerBG-1 {
-  background-image: url("./assets/background/bannerBg/banner-bg-1.png");
+  background-image: url("./assets/banner/banner1.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 @media (max-width: 600px) {
   .bannerBG-1 {
-    background-image: url("./assets/background/bannerBg/mobile-banner-bg-1.png");
+    background-image: url("./assets/banner/banner2.jpg");
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
   }
 }
 .bannerBG-2 {
-  background-image: url("./assets/background/bannerBg/banner-bg-2.png");
+  background-image: url("./assets/banner/banner3.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
