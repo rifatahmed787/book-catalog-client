@@ -7,9 +7,10 @@ import { get_error_messages } from "@/lib/error_messages";
 import ICONS from "@/shared/AllIcons";
 import { Link } from "react-router-dom";
 import { useUploderMutation } from "@/redux/features/upload/uploadApi";
+import FileInput from "../ui/form_items/FileInput";
 
 const SignUpForm = () => {
-  // login mutation hook
+  // signup mutation hook
   const [register, { isLoading, isError, error, isSuccess }] =
     useRegisterMutation();
 
@@ -24,40 +25,6 @@ const SignUpForm = () => {
 
   // file state
   const [file, setFile] = useState<File | undefined>();
-  const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const selectedFile = e.target.files[0];
-      console.log(selectedFile);
-
-      // Set the file in the uploader mutation
-      try {
-        const response = await uploader({
-          data: selectedFile,
-        });
-
-        // Handle the response as needed
-        console.log(response);
-
-        // Optionally, set the file state if needed
-        setFile(selectedFile);
-
-        // Set success message or handle success case
-        setAlertType("success");
-        setAlertMessages("File uploaded successfully");
-        setIsAlertOpen(true);
-      } catch (error) {
-        // Handle errors here
-        console.error(error);
-
-        // Set error message or handle error case
-        setAlertType("error");
-        setAlertMessages("Error uploading file");
-        setIsAlertOpen(true);
-      }
-    } else {
-      setFile(undefined);
-    }
-  };
 
   // form state
   const [sign_up_form, setSignUpForm] = useState({
@@ -66,12 +33,32 @@ const SignUpForm = () => {
     address: "",
     email: "",
     password: "",
-    imageUrl: "",
   });
 
   //formSubmitHandler
-  const formSubmitHandler = (e: React.SyntheticEvent) => {
+  const formSubmitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+
+    let imageUrl = "";
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        const uploadResponse = await uploader({ data: formData });
+        if (uploadResponse) {
+          if ("data" in uploadResponse) {
+            imageUrl = uploadResponse.data.images[0];
+          } else {
+            console.error("Upload error:", uploadResponse.error);
+          }
+        }
+        console.log(imageUrl);
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      }
+    }
+
     const { first_name, last_name, ...othersData } = sign_up_form;
     register({
       data: {
@@ -80,6 +67,7 @@ const SignUpForm = () => {
           firstName: first_name,
           lastName: last_name,
         },
+        imageUrl,
       },
     });
   };
@@ -111,6 +99,7 @@ const SignUpForm = () => {
       <form
         onSubmit={formSubmitHandler}
         className=" relative flex  max-w-lg rounded-xl w-full  flex-col gap-4 backdrop-blur-3xl bg-white/80 mx-5 px-5 md:px-[74px] py-7"
+        encType="multipart/form-data"
       >
         {/* title */}
         <div className="flex items-center justify-between gap-3 flex-wrap ">
@@ -151,16 +140,18 @@ const SignUpForm = () => {
           </div>
 
           {/* image url */}
-          <TextInput
-            type="file"
-            placeHolder=""
-            currentValue={sign_up_form?.imageUrl}
-            onChange={onSelectFile}
-            required={true}
+          <FileInput
+            label=""
+            onChange={(selectedFile: File | undefined) => {
+              console.log("Selected file:", selectedFile);
+              setFile(selectedFile);
+            }}
+            currentFile={file}
+            placeholder="Choose an image"
+            required
             id="image"
             htmlFor="image"
-            label=""
-            className=""
+            currentValue={""}
           />
 
           {/* Email */}

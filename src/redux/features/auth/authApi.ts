@@ -7,15 +7,18 @@ const cookies = new Cookies();
 export const authAPi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // register
+
     register: builder.mutation({
       query: ({ data }) => ({
         url: "auth/signup",
         method: "POST",
         body: { ...data },
       }),
+
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          console.log("the query result", result);
           cookies.set(
             "auth_details",
             JSON.stringify({
