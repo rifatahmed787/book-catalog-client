@@ -15,12 +15,10 @@ import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 const AddBookForm = () => {
   // user details
   const { user } = useAppSelector((state) => state.auth);
-
+  const [isLoading, setIsLoading] = useState(false);
   // Add book mutation hook
-  const [
-    addBok,
-    { data: new_book_data, isLoading, isError, error, isSuccess },
-  ] = useAddBookMutation();
+  const [addBok, { data: new_book_data, isError, error, isSuccess }] =
+    useAddBookMutation();
   const [uploader] = useUploderMutation();
 
   // Alert State
@@ -51,6 +49,7 @@ const AddBookForm = () => {
   //formSubmitHandler
   const formSubmitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     let imageUrl = "";
     if (file) {
@@ -86,6 +85,7 @@ const AddBookForm = () => {
     };
 
     addBok(book_data_with_cover_image);
+    setIsLoading(false);
   };
 
   // Input handler
