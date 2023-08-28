@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 
 // import required modules
 
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 
 import { Autoplay, Navigation, EffectFade } from "swiper/modules";
 import { Icon } from "@iconify/react";
@@ -30,9 +30,11 @@ type SwiperRef = {
   swiper?: Swiper;
 };
 
-const Slider = () => {
+const BannerSwiper = () => {
   const { darkMode } = useContext(DarkModeContext);
   const swiperRef = useRef<SwiperRef>(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   // Function to slide to the previous slide
   const goPrevButton = () => {
@@ -45,6 +47,21 @@ const Slider = () => {
   const goNextButton = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
       swiperRef.current.swiper.slideNext();
+    }
+  };
+
+  const handleSlideChange = (swiper: { activeIndex: any }) => {
+    const currentIndex = swiper.activeIndex;
+    setActiveSlideIndex(currentIndex);
+
+    if (textRef.current) {
+      textRef.current.classList.add("banner-zoom");
+    }
+  };
+
+  const handleTransitionEnd = () => {
+    if (textRef.current) {
+      textRef.current.classList.remove("banner-zoom");
     }
   };
 
@@ -66,6 +83,8 @@ const Slider = () => {
         className={`mySwiper max-h-screen relative group ${
           darkMode ? "bg-gradient-backdrop" : ""
         }`}
+        onSlideChange={handleSlideChange}
+        onTransitionEnd={handleTransitionEnd}
       >
         {/* Slide 1 */}
         <SwiperSlide>
@@ -75,14 +94,20 @@ const Slider = () => {
               <div className="flex py-10 items-center justify-center md:justify-start px-10 md:px-20">
                 <div>
                   <h1
-                    className={`text-2xl md:text-4xl text-center font-bold bg-third text-white p-3 md:px-5 mb-3  `}
+                    ref={textRef}
+                    className={`text-2xl md:text-4xl text-center  font-bold bg-third text-white p-3 md:px-5 mb-3  ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
                   >
                     Today a <span className="text-primary">reader, </span>
                     tomorrow a <span className="text-primary">leader.</span>
                   </h1>
 
                   <article
-                    className={`text-white md:p-5 text-base text-center md:text-xl font-extralight`}
+                    ref={textRef}
+                    className={`text-white md:p-5 text-base text-center md:text-xl font-extralight ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
                   >
                     “The more that you read, the more things you will know. The
                     more that you learn, the more places you'll go.” “Books are
@@ -91,25 +116,20 @@ const Slider = () => {
                   </article>
                   {/* Button: Booking Now & Details More */}
                   <div className="my-3 md:px-5 flex justify-center items-center gap-5 ">
-                    <div
-                      data-aos="fade-up"
-                      data-aos-anchor-placement="bottom-bottom"
-                    >
+                    <div>
                       <Link to="/">
                         <BrandButton text="Buy Now >>" />
                       </Link>
                     </div>
-                    <div
-                      data-aos="fade-up"
-                      data-aos-anchor-placement="bottom-bottom"
-                    >
-                      <Link to="#">
+                    <div>
+                      <Link to="/">
                         <WhiteButton text="Read Now →" />
                       </Link>
                     </div>
                   </div>
                 </div>
               </div>
+              <div></div>
             </div>
           </div>
         </SwiperSlide>
@@ -124,7 +144,10 @@ const Slider = () => {
               <div className="flex order-1 md:order-2 py-10 items-center justify-center  px-10 md:px-20">
                 <div className="md:pl-10">
                   <h1
-                    className={`text-2xl md:text-4xl text-center  font-bold bg-third text-white p-3 md:px-5 mb-3 `}
+                    ref={textRef}
+                    className={`text-2xl md:text-4xl text-center  font-bold bg-third text-white p-3 md:px-5 mb-3  ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
                   >
                     A reader lives a{" "}
                     <span className="text-primary">thousand </span>
@@ -132,7 +155,10 @@ const Slider = () => {
                   </h1>
 
                   <article
-                    className={`text-white md:p-5 text-base text-center  md:text-xl font-extralight `}
+                    ref={textRef}
+                    className={`text-white md:p-5 text-base text-center md:text-xl font-extralight ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
                   >
                     “The more that you read, the more things you will know. The
                     more that you learn, the more places you'll go.” “Books are
@@ -141,19 +167,13 @@ const Slider = () => {
                   </article>
                   {/* Button: Booking Now & Details More */}
                   <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-center">
-                    <div
-                      data-aos="fade-up"
-                      data-aos-anchor-placement="bottom-bottom"
-                    >
+                    <div>
                       <Link to="/">
                         <BrandButton text="Buy Now >>" />
                       </Link>
                     </div>
-                    <div
-                      data-aos="fade-up"
-                      data-aos-anchor-placement="bottom-bottom"
-                    >
-                      <Link to="#">
+                    <div>
+                      <Link to="/">
                         <WhiteButton text="Read Now →" />
                       </Link>
                     </div>
@@ -172,14 +192,20 @@ const Slider = () => {
               <div className="flex py-10 items-center justify-center md:justify-start px-10 md:px-20">
                 <div>
                   <h1
-                    className={`text-2xl md:text-4xl text-center font-bold bg-third text-white p-3 md:px-5 mb-3  `}
+                    ref={textRef}
+                    className={`text-2xl md:text-4xl text-center  font-bold bg-third text-white p-3 md:px-5 mb-3  ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
                   >
                     Today a <span className="text-primary">reader, </span>
                     tomorrow a <span className="text-primary">leader.</span>
                   </h1>
 
                   <article
-                    className={`text-white md:p-5 text-base text-center md:text-xl font-extralight`}
+                    ref={textRef}
+                    className={`text-white md:p-5 text-base text-center md:text-xl font-extralight ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
                   >
                     “The more that you read, the more things you will know. The
                     more that you learn, the more places you'll go.” “Books are
@@ -188,18 +214,12 @@ const Slider = () => {
                   </article>
                   {/* Button: Booking Now & Details More */}
                   <div className="my-3 md:px-5 flex justify-center items-center gap-5 ">
-                    <div
-                      data-aos="fade-up"
-                      data-aos-anchor-placement="bottom-bottom"
-                    >
+                    <div>
                       <Link to="/">
                         <BrandButton text="Buy Now >>" />
                       </Link>
                     </div>
-                    <div
-                      data-aos="fade-up"
-                      data-aos-anchor-placement="bottom-bottom"
-                    >
+                    <div>
                       <Link to="#">
                         <WhiteButton text="Read Now →" />
                       </Link>
@@ -221,7 +241,10 @@ const Slider = () => {
               <div className="flex order-1 md:order-2 py-10 items-center justify-center  px-10 md:px-20">
                 <div className="md:pl-10">
                   <h1
-                    className={`text-2xl md:text-4xl text-center  font-bold bg-third text-white p-3 md:px-5 mb-3 `}
+                    ref={textRef}
+                    className={`text-2xl md:text-4xl text-center  font-bold bg-third text-white p-3 md:px-5 mb-3  ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
                   >
                     A reader lives a{" "}
                     <span className="text-primary">thousand </span>
@@ -229,7 +252,10 @@ const Slider = () => {
                   </h1>
 
                   <article
-                    className={`text-white md:p-5 text-base text-center  md:text-xl font-extralight `}
+                    ref={textRef}
+                    className={`text-white md:p-5 text-base text-center md:text-xl font-extralight ${
+                      activeSlideIndex === 0 ? "banner-zoom" : ""
+                    }`}
                   >
                     “The more that you read, the more things you will know. The
                     more that you learn, the more places you'll go.” “Books are
@@ -238,19 +264,13 @@ const Slider = () => {
                   </article>
                   {/* Button: Booking Now & Details More */}
                   <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-center">
-                    <div
-                      data-aos="fade-up"
-                      data-aos-anchor-placement="bottom-bottom"
-                    >
+                    <div>
                       <Link to="/">
                         <BrandButton text="Buy Now >>" />
                       </Link>
                     </div>
-                    <div
-                      data-aos="fade-up"
-                      data-aos-anchor-placement="bottom-bottom"
-                    >
-                      <Link to="#">
+                    <div>
+                      <Link to="/">
                         <WhiteButton text="Read Now →" />
                       </Link>
                     </div>
@@ -287,4 +307,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default BannerSwiper;

@@ -7,6 +7,9 @@ import "./index.css";
 import store from "./redux/store.ts";
 import { CookiesProvider } from "react-cookie";
 import { DarkModeProvider } from "./components/DarkModeContext/DarkModeContext.tsx";
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <DarkModeProvider>

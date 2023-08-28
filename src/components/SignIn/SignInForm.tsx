@@ -123,7 +123,7 @@ const SignInForm = () => {
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className="absolute  -bottom-14 left-0 right-0 mx-auto flex justify-center"
+          className="absolute  top-0 left-0 right-0 mx-auto flex justify-center"
         />
       )}
     </form>
