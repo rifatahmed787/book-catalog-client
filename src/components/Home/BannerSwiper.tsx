@@ -1,30 +1,50 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import BrandButton from "../BrandButton/BrandButton";
+import WhiteButton from "../BrandButton/WhiteButton";
+
+// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Autoplay, EffectFade, Navigation } from "swiper/modules";
-import BrandButton from "../BrandButton/BrandButton";
-import WhiteButton from "../BrandButton/WhiteButton";
 
-const BannerSwiper = () => {
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const textRef = useRef<HTMLDivElement | null>(null);
+// import required modules
 
-  const handleSlideChange = (swiper: { activeIndex: number }) => {
-    const currentIndex = swiper.activeIndex;
-    setActiveSlideIndex(currentIndex);
+import { useContext, useRef } from "react";
 
-    if (textRef.current) {
-      textRef.current.classList.add("banner-zoom");
+import { Autoplay, Navigation, EffectFade } from "swiper/modules";
+import { Icon } from "@iconify/react";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
+import { Link } from "react-router-dom";
+
+type Swiper = {
+  swiper: Swiper | null;
+
+  slidePrev: () => void;
+  slideNext: () => void;
+};
+
+type SwiperRef = {
+  swiper?: Swiper;
+};
+
+const Slider = () => {
+  const { darkMode } = useContext(DarkModeContext);
+  const swiperRef = useRef<SwiperRef>(null);
+
+  // Function to slide to the previous slide
+  const goPrevButton = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
     }
   };
 
-  const handleTransitionEnd = () => {
-    if (textRef.current) {
-      textRef.current.classList.remove("banner-zoom");
+  // Function to slide to the next slide
+  const goNextButton = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
     }
   };
 
@@ -32,37 +52,37 @@ const BannerSwiper = () => {
     <>
       <Swiper
         spaceBetween={30}
-        effect="fade"
-        navigation
-        autoplay={{ delay: 5500, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
-        onSlideChange={handleSlideChange}
-        onTransitionEnd={handleTransitionEnd}
-        className="mySwiper"
+        loop={true}
+        effect={"fade"}
+        navigation={{
+          prevEl: ".prev-button-1",
+          nextEl: ".next-button-1",
+        }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         modules={[Autoplay, EffectFade, Navigation]}
+        className={`mySwiper max-h-screen relative group ${
+          darkMode ? "bg-gradient-backdrop" : ""
+        }`}
       >
         {/* Slide 1 */}
         <SwiperSlide>
-          <div className="bannerBG-1 md:h-[75vh] h-screen flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-20 after:h-full after:w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 z-10">
+          <div className="bannerBG-1 h-[60vh] md:h-[75vh] flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-50 after:h-full after:w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 z-10">
               {/* Left Side: Text Area */}
               <div className="flex py-10 items-center justify-center md:justify-start px-10 md:px-20">
                 <div>
                   <h1
-                    ref={textRef}
-                    className={`text-2xl md:text-4xl text-center md:text-start font-bold bg-third text-white p-3 md:px-5 mb-3  ${
-                      activeSlideIndex === 0 ? "banner-zoom" : ""
-                    }`}
+                    className={`text-2xl md:text-4xl text-center font-bold bg-third text-white p-3 md:px-5 mb-3  `}
                   >
                     Today a <span className="text-primary">reader, </span>
                     tomorrow a <span className="text-primary">leader.</span>
                   </h1>
 
                   <article
-                    ref={textRef}
-                    className={`md:text-white md:p-5 text-black text-base text-center md:text-start md:text-xl font-extralight ${
-                      activeSlideIndex === 0 ? "banner-zoom" : ""
-                    }`}
+                    className={`text-white md:p-5 text-base text-center md:text-xl font-extralight`}
                   >
                     “The more that you read, the more things you will know. The
                     more that you learn, the more places you'll go.” “Books are
@@ -70,7 +90,7 @@ const BannerSwiper = () => {
                     pocket, one to read, one to write in.”
                   </article>
                   {/* Button: Booking Now & Details More */}
-                  <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-start">
+                  <div className="my-3 md:px-5 flex justify-center items-center gap-5 ">
                     <div
                       data-aos="fade-up"
                       data-aos-anchor-placement="bottom-bottom"
@@ -93,19 +113,18 @@ const BannerSwiper = () => {
             </div>
           </div>
         </SwiperSlide>
+
         {/* Slide 2 */}
 
         <SwiperSlide>
-          <div className="bannerBG-2 md:h-[75vh] h-screen flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-20 after:h-full after:w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="bannerBG-2 h-[60vh] md:h-[75vh] flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-50 after:h-full after:w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 z-10">
+              <div></div>
               {/* Right Side: Text Area */}
-              <div className="flex order-1 md:order-2 py-10 items-center justify-center md:justify-end px-10 md:px-20">
+              <div className="flex order-1 md:order-2 py-10 items-center justify-center  px-10 md:px-20">
                 <div className="md:pl-10">
                   <h1
-                    ref={textRef}
-                    className={`text-2xl md:text-4xl text-center md:text-start font-bold bg-third text-white p-3 md:px-5 mb-3  ${
-                      activeSlideIndex === 0 ? "banner-zoom" : ""
-                    }`}
+                    className={`text-2xl md:text-4xl text-center  font-bold bg-third text-white p-3 md:px-5 mb-3 `}
                   >
                     A reader lives a{" "}
                     <span className="text-primary">thousand </span>
@@ -113,10 +132,7 @@ const BannerSwiper = () => {
                   </h1>
 
                   <article
-                    ref={textRef}
-                    className={`md:text-white md:p-5 text-black text-base text-center md:text-start md:text-xl font-extralight ${
-                      activeSlideIndex === 0 ? "banner-zoom" : ""
-                    }`}
+                    className={`text-white md:p-5 text-base text-center  md:text-xl font-extralight `}
                   >
                     “The more that you read, the more things you will know. The
                     more that you learn, the more places you'll go.” “Books are
@@ -124,7 +140,7 @@ const BannerSwiper = () => {
                     pocket, one to read, one to write in.”
                   </article>
                   {/* Button: Booking Now & Details More */}
-                  <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-start">
+                  <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-center">
                     <div
                       data-aos="fade-up"
                       data-aos-anchor-placement="bottom-bottom"
@@ -147,9 +163,128 @@ const BannerSwiper = () => {
             </div>
           </div>
         </SwiperSlide>
+
+        {/* Slide 3 */}
+        <SwiperSlide>
+          <div className="bannerBG-3 h-[60vh] md:h-[75vh] flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-50 after:h-full after:w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 z-10">
+              {/* Left Side: Text Area */}
+              <div className="flex py-10 items-center justify-center md:justify-start px-10 md:px-20">
+                <div>
+                  <h1
+                    className={`text-2xl md:text-4xl text-center font-bold bg-third text-white p-3 md:px-5 mb-3  `}
+                  >
+                    Today a <span className="text-primary">reader, </span>
+                    tomorrow a <span className="text-primary">leader.</span>
+                  </h1>
+
+                  <article
+                    className={`text-white md:p-5 text-base text-center md:text-xl font-extralight`}
+                  >
+                    “The more that you read, the more things you will know. The
+                    more that you learn, the more places you'll go.” “Books are
+                    a uniquely portable magic.” “I kept always two books in my
+                    pocket, one to read, one to write in.”
+                  </article>
+                  {/* Button: Booking Now & Details More */}
+                  <div className="my-3 md:px-5 flex justify-center items-center gap-5 ">
+                    <div
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
+                    >
+                      <Link to="/">
+                        <BrandButton text="Buy Now >>" />
+                      </Link>
+                    </div>
+                    <div
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
+                    >
+                      <Link to="#">
+                        <WhiteButton text="Read Now →" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+
+        {/* Slide 4 */}
+
+        <SwiperSlide>
+          <div className="bannerBG-4 h-[60vh] md:h-[75vh] flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-50 after:h-full after:w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 z-10">
+              <div></div>
+              {/* Right Side: Text Area */}
+              <div className="flex order-1 md:order-2 py-10 items-center justify-center  px-10 md:px-20">
+                <div className="md:pl-10">
+                  <h1
+                    className={`text-2xl md:text-4xl text-center  font-bold bg-third text-white p-3 md:px-5 mb-3 `}
+                  >
+                    A reader lives a{" "}
+                    <span className="text-primary">thousand </span>
+                    lives before he <span className="text-primary">dies.</span>
+                  </h1>
+
+                  <article
+                    className={`text-white md:p-5 text-base text-center  md:text-xl font-extralight `}
+                  >
+                    “The more that you read, the more things you will know. The
+                    more that you learn, the more places you'll go.” “Books are
+                    a uniquely portable magic.” “I kept always two books in my
+                    pocket, one to read, one to write in.”
+                  </article>
+                  {/* Button: Booking Now & Details More */}
+                  <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-center">
+                    <div
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
+                    >
+                      <Link to="/">
+                        <BrandButton text="Buy Now >>" />
+                      </Link>
+                    </div>
+                    <div
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
+                    >
+                      <Link to="#">
+                        <WhiteButton text="Read Now →" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+        <div className="space-x-3 absolute bottom-0 md:bottom-5 z-10 right-5 md:hidden group-hover:block">
+          <button
+            className="prev-button-1 bg-primary rounded-full p-0.5 md:p-1"
+            onClick={() => goPrevButton()}
+          >
+            <Icon
+              icon="ep:arrow-left-bold"
+              width={40}
+              className="text-white font-bold"
+            />
+          </button>
+          <button
+            className="next-button-1 bg-primary rounded-full p-0.5 md:p-1"
+            onClick={() => goNextButton()}
+          >
+            <Icon
+              icon="ep:arrow-right-bold"
+              width={40}
+              className="text-white font-bold"
+            />
+          </button>
+        </div>
       </Swiper>
     </>
   );
 };
 
-export default BannerSwiper;
+export default Slider;
