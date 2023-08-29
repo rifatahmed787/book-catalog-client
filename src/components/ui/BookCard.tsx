@@ -104,63 +104,27 @@ const BookCard = ({ book }: { book: IBook }) => {
       onClick={() => cardClickHandler()}
     >
       {/* Image */}
-      {/* <div className="group h-[300px] overflow-hidden border-[5px] border-white">
-        <div className="relative after:absolute after:content-normal group-hover:after:bg-black/60 after:left-0 after:top-0 after:w-full after:h-full after:duration-700 ">
+
+      <div className="group h-[300px] overflow-hidden border-[5px] border-white">
+        <div className="block shadow-lg relative after:absolute after:content-normal group-hover:after:bg-black/60 after:left-0 after:top-0 after:w-full after:h-full after:duration-700">
           <img
             src={book?.cover_image}
             className="w-full h-full object-cover transition-transform transform group-hover:scale-110 duration-300"
             alt=""
           />
 
-          <div className="">
-            <div className="relative inline-flex items-center justify-start px-4 py-2 mb-10 overflow-hidden font-medium transition-all bg-yellow-500 rounded hover:bg-blue-700 group">
-              <button className="absolute z-10 -left-full top-1/2 transform group-hover:translate-x-1/2  text-primary bg-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="absolute left-0 right-0 top-10 z-30 transform -translate-x-1/2 transition duration-500 h-full group-hover:translate-x-5 delay-100">
+            <div className="flex items-center">
+              <button className="flex justify-center items-center gap-1 text-primary text-center bg-white w-10 h-10 rounded-full overflow-hidden relative transition-all duration-300 hover:w-28">
                 {isAddToWisLoading ? (
                   ICONS.button_loading_icon
                 ) : (
-                  <Icon icon="mdi:heart" />
+                  <>
+                    <Icon icon="mdi:heart" className="" />
+                    <span className="text-primary ">WishList</span>
+                  </>
                 )}
               </button>
-              <span className="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 text-primary bg-white p-3 rounded-full group-hover:inline-block">
-                Wishlist
-              </span>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      <div className="group h-[300px] overflow-hidden border-[5px] border-white">
-        <div className=" block  shadow-lg">
-          <img
-            src={book?.cover_image}
-            className="w-full h-full object-cover transition-transform transform group-hover:scale-110 duration-300"
-            alt=""
-          />
-          <div className="absolute transition duration-300 opacity-70 group-hover:bg-black/60 group-hover:opacity-90 w-full h-full z-10"></div>
-          <div className="absolute left-0 right-0 bottom-0 p-6 z-30 transform translate-y-1/2 transition duration-500 h-full group-hover:translate-y-0 delay-100">
-            <div className="h-1/2 relative">
-              <div className="absolute bottom-0">
-                <h2 className="font-bold text-white leading-tight transition duration-300 text-4xl pb-6 ">
-                  I am Rifat
-                </h2>
-              </div>
-            </div>
-            <div className="h-1/2">
-              <p className="text-white pb-4 opacity-0 transition duration-300 group-hover:opacity-100">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa
-                est consectetur possimus reprehenderit aspernatur nulla,
-                cupiditate voluptatibus quidem inventore ipsam.
-              </p>
-
-              <a
-                href="/"
-                className="relative inline-flex items-center justify-start px-4 py-2 mb-10 overflow-hidden font-medium transition-all bg-yellow-500 rounded hover:bg-blue-700 group"
-              >
-                <span className="w-20 h-20 rounded rotate-[-40deg] hover:bg-blue-700 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
-                <span className="relative w-full text-left text-white transition-colors duration-300 ease-in-out group-hover:text-white">
-                  Read More
-                </span>
-              </a>
             </div>
           </div>
         </div>
@@ -169,34 +133,34 @@ const BookCard = ({ book }: { book: IBook }) => {
       {/* other items */}
       <div className="mt-[18px]">
         {/* title & rating  */}
-        <div className="flex items-center justify-between gap-[24px] px-4 ">
-          <p className="text-[#3C3C3C] font-inter  text-2xl font-medium    ">
-            {book?.title}
+        <div className="flex items-center justify-between gap-5 px-4 ">
+          <p className="text-primary font-inter  text-2xl font-medium    ">
+            {book?.title} <span className="text-sm">by-{book.author}</span>
           </p>
 
-          <p className="text-[#3C3C3C] font-inter  text-xl  text-right font-bold  flex items-center gap-2 ">
-            {ICONS.star_icon} {book.rating}
+          <p className="text-primary font-inter border-none text-xl text-right font-bold flex items-center gap-2 ">
+            {Array.from({ length: book.rating }, (_, index) => (
+              <span key={index}>{ICONS.star_icon}</span>
+            ))}
+            {book.rating}
           </p>
         </div>
         {/*  */}
 
-        <div className="my-[27px] px-4 flex items-center justify-start gap-3 flex-wrap">
+        <div className="my-[27px] px-4 flex items-center justify-between gap-3 flex-wrap">
           <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
             {book.publication_date}
           </p>
           <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
-            {book.pages} pages
-          </p>
-          <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
-            by-{book.author}
+            pages: {book.pages}
           </p>
         </div>
       </div>
 
       {/* buttons*/}
-      <div className="  border-t border-[#000] h-14 px-4  flex items-center justify-between mt-auto">
+      <div className="border-t border-primary h-14 px-4  flex items-center justify-between mt-auto">
         <button
-          className=" h-full text-[#3C3C3C] font-inter  text-lg font-semibold flex items-center 
+          className="  px-6 py-1 text-white bg-primary font-inter  text-xm font-semibold flex items-center 
 					gap-2  "
           onClick={addInToReadListHandler}
         >
@@ -204,10 +168,10 @@ const BookCard = ({ book }: { book: IBook }) => {
           {isAddToReadLoading ? ICONS.button_loading_icon : ""}
         </button>
         <button
-          className="text-xm text-white px-6 py-1 bg-[#000000]"
+          className="text-xm text-primary hover:text-white hover:bg-primary duration-500 px-6 py-1 border "
           onClick={wishListHandler}
         >
-          {isAddToWisLoading ? ICONS.button_loading_icon : ICONS.heart_icon}
+          ADD TO CART
         </button>
       </div>
 
@@ -226,3 +190,29 @@ const BookCard = ({ book }: { book: IBook }) => {
 };
 
 export default BookCard;
+
+/* 
+style="position: relative; overflow: hidden; height: 362px;
+
+
+1.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px);"
+
+2.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(263px, 0px, 0px);"
+
+3.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(526px, 0px, 0px);"
+
+4.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(789px, 0px, 0px);"
+
+5.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(1052px, 0px, 0px);"
+
+6.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 181px, 0px);"
+
+7.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(263px, 181px, 0px);"
+
+8. style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(526px, 181px, 0px);"
+
+9.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(789px, 181px, 0px);"
+
+10. style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(1052px, 181px, 0px);"
+
+*/
