@@ -8,6 +8,7 @@ import { useContext, useEffect } from "react";
 
 import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 import BrandButton from "../BrandButton/BrandButton";
+import { Icon } from "@iconify/react";
 
 const ContactUs = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -210,7 +211,7 @@ const ContactUs = () => {
           </div>
 
           <div className="flex justify-center">
-            <BrandButton text="Send" />
+            <BrandButton text="Send" icon={<Icon icon="tabler:send" />} />
           </div>
         </div>
         <div className="absolute before:rounded-br-3xl after:rounded-br-3xl -right-0.5 -bottom-0.5 w-2/3 h-2/3 border-r-1 border-b-1 before:absolute before:top-0 before:left-0 before:w-full before:h-full before:border-r-2 before:border-b-2 before:border-primary after:absolute after:bottom-0 after:right-0  after:border-r-2 after:border-b-2 after:border-primary -z-10 " />

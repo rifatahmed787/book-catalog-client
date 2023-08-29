@@ -57,7 +57,7 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
             {user?.name?.firstName} {user?.name?.lastName}
           </h2>
           <Link to="" className="flex justify-center mb-2">
-            <BrandButton text="View Profile" />
+            <BrandButton text="View Profile" icon="" />
           </Link>
         </div>
         <ul

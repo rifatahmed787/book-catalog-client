@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
 const BookCard = ({ book }: { book: IBook }) => {
+  const [isLoveHovered, setIsLoveHovered] = useState(false);
+  const [isViewHovered, setIsViewHovered] = useState(false);
+  const [isCompareHovered, setIsCompareHovered] = useState(false);
   const { user, isLoggedIn } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -113,15 +116,84 @@ const BookCard = ({ book }: { book: IBook }) => {
             alt=""
           />
 
-          <div className="absolute left-0 right-0 top-10 z-30 transform -translate-x-1/2 transition duration-500 h-full group-hover:translate-x-5 delay-100">
-            <div className="flex items-center">
-              <button className="flex justify-center items-center gap-1 text-primary text-center bg-white w-10 h-10 rounded-full overflow-hidden relative transition-all duration-300 hover:w-28">
+          <div className="absolute left-0 right-0 top-16 z-30 transform -translate-x-1/2 transition duration-500 h-full group-hover:translate-x-5 delay-100">
+            <div className="space-y-3">
+              {/* wishlist button */}
+              <button
+                onClick={wishListHandler}
+                onMouseEnter={() => setIsLoveHovered(true)}
+                onMouseLeave={() => setIsLoveHovered(false)}
+                className={`flex justify-center items-center gap-1 text-center  w-10 h-10 rounded-full overflow-hidden relative transition-all duration-300 hover:w-28 ${
+                  isLoveHovered
+                    ? "bg-primary text-white"
+                    : "bg-white text-primary "
+                }`}
+              >
                 {isAddToWisLoading ? (
                   ICONS.button_loading_icon
                 ) : (
                   <>
-                    <Icon icon="mdi:heart" className="" />
-                    <span className="text-primary ">WishList</span>
+                    {isLoveHovered ? (
+                      <div className="flex items-center gap-1">
+                        <Icon icon="mdi:heart" className="" />
+                        <span>WishList</span>
+                      </div>
+                    ) : (
+                      <Icon icon="mdi:heart" className="" />
+                    )}
+                  </>
+                )}
+              </button>
+
+              {/* quick view button  */}
+              <button
+                onClick={() => cardClickHandler()}
+                onMouseEnter={() => setIsViewHovered(true)}
+                onMouseLeave={() => setIsViewHovered(false)}
+                className={`flex justify-center items-center gap-1 text-center  w-10 h-10 rounded-full overflow-hidden relative transition-all duration-300 hover:w-28 ${
+                  isViewHovered
+                    ? "bg-primary text-white"
+                    : "bg-white text-primary "
+                }`}
+              >
+                {isAddToWisLoading ? (
+                  ICONS.button_loading_icon
+                ) : (
+                  <>
+                    {isViewHovered ? (
+                      <div className="flex items-center gap-1">
+                        <Icon icon="jam:search-plus" />
+                        <span>Details</span>
+                      </div>
+                    ) : (
+                      <Icon icon="jam:search-plus" />
+                    )}
+                  </>
+                )}
+              </button>
+
+              {/* compare button */}
+              <button
+                onMouseEnter={() => setIsCompareHovered(true)}
+                onMouseLeave={() => setIsCompareHovered(false)}
+                className={`flex justify-center items-center gap-1 text-center  w-10 h-10 rounded-full overflow-hidden relative transition-all duration-300 hover:w-28 ${
+                  isCompareHovered
+                    ? "bg-primary text-white"
+                    : "bg-white text-primary "
+                }`}
+              >
+                {isAddToWisLoading ? (
+                  ICONS.button_loading_icon
+                ) : (
+                  <>
+                    {isCompareHovered ? (
+                      <div className="flex items-center gap-1">
+                        <Icon icon="ic:round-star" />
+                        <span>Compare</span>
+                      </div>
+                    ) : (
+                      <Icon icon="ic:round-star" />
+                    )}
                   </>
                 )}
               </button>
@@ -167,10 +239,7 @@ const BookCard = ({ book }: { book: IBook }) => {
           Start reading
           {isAddToReadLoading ? ICONS.button_loading_icon : ""}
         </button>
-        <button
-          className="text-xm text-primary hover:text-white hover:bg-primary duration-500 px-6 py-1 border "
-          onClick={wishListHandler}
-        >
+        <button className="text-xm text-primary hover:text-white hover:bg-primary duration-500 px-6 py-1 border ">
           ADD TO CART
         </button>
       </div>

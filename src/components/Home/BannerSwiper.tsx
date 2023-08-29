@@ -123,7 +123,7 @@ const BannerSwiper = () => {
                     </div>
                     <div>
                       <Link to="/">
-                        <WhiteButton text="Read Now →" />
+                        <WhiteButton text="Read Now ⇾" />
                       </Link>
                     </div>
                   </div>
@@ -174,7 +174,7 @@ const BannerSwiper = () => {
                     </div>
                     <div>
                       <Link to="/">
-                        <WhiteButton text="Read Now →" />
+                        <WhiteButton text="Read Now ⇾" />
                       </Link>
                     </div>
                   </div>
@@ -221,7 +221,7 @@ const BannerSwiper = () => {
                     </div>
                     <div>
                       <Link to="#">
-                        <WhiteButton text="Read Now →" />
+                        <WhiteButton text="Read Now ⇾" />
                       </Link>
                     </div>
                   </div>
@@ -271,7 +271,7 @@ const BannerSwiper = () => {
                     </div>
                     <div>
                       <Link to="/">
-                        <WhiteButton text="Read Now →" />
+                        <WhiteButton text="Read Now ⇾" />
                       </Link>
                     </div>
                   </div>

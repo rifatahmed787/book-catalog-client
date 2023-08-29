@@ -8,9 +8,13 @@ import ToastContainer from "./Toast";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { useAddBookInReadingListMutation } from "@/redux/features/reading/readingApi";
 import { useNavigate } from "react-router-dom";
+import { Icon } from "@iconify/react";
 
 const BookCard2 = ({ book }: { book: IBook }) => {
   const { user, isLoggedIn } = useAppSelector((state) => state.auth);
+  const [isLoveHovered, setIsLoveHovered] = useState(false);
+  const [isViewHovered, setIsViewHovered] = useState(false);
+  const [isCompareHovered, setIsCompareHovered] = useState(false);
   const navigate = useNavigate();
 
   // add in wish mutation hook
@@ -95,57 +99,144 @@ const BookCard2 = ({ book }: { book: IBook }) => {
 
   return (
     <div
-      className=" relative bg-transparent w-full h-[498px] border border-[#000] flex flex-col  cursor-pointer   "
+      className=" relative bg-white shadow-md w-[370px] overflow-hidden h-[498px] flex flex-col cursor-pointer "
       onClick={() => cardClickHandler()}
     >
       {/* Image */}
-      <img
-        src={book?.cover_image}
-        className="w-full  h-[274px]  object-cover overflow-hidden  border-b border-[#000]  "
-        alt=""
-      />
+
+      <div className="group h-[300px] overflow-hidden border-[5px] border-white">
+        <div className="block shadow-lg relative after:absolute after:content-normal group-hover:after:bg-black/60 after:left-0 after:top-0 after:w-full after:h-full after:duration-700">
+          <img
+            src={book?.cover_image}
+            className="w-full h-full object-cover transition-transform transform group-hover:scale-110 duration-300"
+            alt=""
+          />
+
+          <div className="absolute left-0 right-0 top-16 z-30 transform -translate-x-1/2 transition duration-500 h-full group-hover:translate-x-5 delay-100">
+            <div className="space-y-3">
+              {/* wishlist button */}
+              <button
+                onClick={wishListHandler}
+                onMouseEnter={() => setIsLoveHovered(true)}
+                onMouseLeave={() => setIsLoveHovered(false)}
+                className={`flex justify-center items-center gap-1 text-center  w-10 h-10 rounded-full overflow-hidden relative transition-all duration-300 hover:w-28 ${
+                  isLoveHovered
+                    ? "bg-primary text-white"
+                    : "bg-white text-primary "
+                }`}
+              >
+                {isAddToWisLoading ? (
+                  ICONS.button_loading_icon
+                ) : (
+                  <>
+                    {isLoveHovered ? (
+                      <div className="flex items-center gap-1">
+                        <Icon icon="mdi:heart" className="" />
+                        <span>WishList</span>
+                      </div>
+                    ) : (
+                      <Icon icon="mdi:heart" className="" />
+                    )}
+                  </>
+                )}
+              </button>
+
+              {/* quick view button  */}
+              <button
+                onClick={() => cardClickHandler()}
+                onMouseEnter={() => setIsViewHovered(true)}
+                onMouseLeave={() => setIsViewHovered(false)}
+                className={`flex justify-center items-center gap-1 text-center  w-10 h-10 rounded-full overflow-hidden relative transition-all duration-300 hover:w-28 ${
+                  isViewHovered
+                    ? "bg-primary text-white"
+                    : "bg-white text-primary "
+                }`}
+              >
+                {isAddToWisLoading ? (
+                  ICONS.button_loading_icon
+                ) : (
+                  <>
+                    {isViewHovered ? (
+                      <div className="flex items-center gap-1">
+                        <Icon icon="jam:search-plus" />
+                        <span>Details</span>
+                      </div>
+                    ) : (
+                      <Icon icon="jam:search-plus" />
+                    )}
+                  </>
+                )}
+              </button>
+
+              {/* compare button */}
+              <button
+                onMouseEnter={() => setIsCompareHovered(true)}
+                onMouseLeave={() => setIsCompareHovered(false)}
+                className={`flex justify-center items-center gap-1 text-center  w-10 h-10 rounded-full overflow-hidden relative transition-all duration-300 hover:w-28 ${
+                  isCompareHovered
+                    ? "bg-primary text-white"
+                    : "bg-white text-primary "
+                }`}
+              >
+                {isAddToWisLoading ? (
+                  ICONS.button_loading_icon
+                ) : (
+                  <>
+                    {isCompareHovered ? (
+                      <div className="flex items-center gap-1">
+                        <Icon icon="ic:round-star" />
+                        <span>Compare</span>
+                      </div>
+                    ) : (
+                      <Icon icon="ic:round-star" />
+                    )}
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* other items */}
       <div className="mt-[18px]">
         {/* title & rating  */}
-        <div className="flex items-center justify-between gap-[24px] px-4 ">
-          <p className="text-[#3C3C3C] font-inter  text-2xl font-medium    ">
-            {book?.title}
+        <div className="flex items-center justify-between gap-5 px-4 ">
+          <p className="text-primary font-inter  text-2xl font-medium    ">
+            {book?.title} <span className="text-sm">by-{book.author}</span>
           </p>
 
-          <p className="text-[#3C3C3C] font-inter  text-xl  text-right font-bold  flex items-center gap-2 ">
-            {ICONS.star_icon} {book.rating}
+          <p className="text-primary font-inter border-none text-xl text-right font-bold flex items-center gap-2 ">
+            {Array.from({ length: book.rating }, (_, index) => (
+              <span key={index}>{ICONS.star_icon}</span>
+            ))}
+            {book.rating}
           </p>
         </div>
         {/*  */}
 
-        <div className="my-[27px] px-4 flex items-center justify-start gap-3 flex-wrap">
+        <div className="my-[27px] px-4 flex items-center justify-between gap-3 flex-wrap">
           <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
             {book.publication_date}
           </p>
           <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
-            {book.pages} pages
-          </p>
-          <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
-            by-{book.author}
+            pages: {book.pages}
           </p>
         </div>
       </div>
 
       {/* buttons*/}
-      <div className="  border-t border-[#000] h-14 px-4   flex items-center justify-between mt-auto">
+      <div className="border-t border-primary h-14 px-4  flex items-center justify-between mt-auto">
         <button
-          className="text-[#3C3C3C] font-inter h-full  text-lg font-semibold flex items-center 
+          className="  px-6 py-1 text-white bg-primary font-inter  text-xm font-semibold flex items-center 
 					gap-2  "
           onClick={addInToReadListHandler}
         >
           Start reading
           {isAddToReadLoading ? ICONS.button_loading_icon : ""}
         </button>
-        <button
-          className="text-xm text-white px-6 py-1 bg-[#000000]"
-          onClick={wishListHandler}
-        >
-          {isAddToWisLoading ? ICONS.button_loading_icon : ICONS.heart_icon}
+        <button className="text-xm text-primary hover:text-white hover:bg-primary duration-500 px-6 py-1 border ">
+          ADD TO CART
         </button>
       </div>
 
