@@ -36,6 +36,7 @@ const AddBookForm = () => {
     publisher: "",
     language: "",
     pages: 0,
+    cover_image: "",
     rating: 1,
     description: "",
     keynotes: [""],
@@ -46,7 +47,7 @@ const AddBookForm = () => {
   // file state
   const [file, setFile] = useState<File | undefined>();
 
-  //formSubmitHandler
+  // formSubmitHandler
   const formSubmitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -65,7 +66,6 @@ const AddBookForm = () => {
             console.error("Upload error:", uploadResponse.error);
           }
         }
-        console.log(imageUrl);
       } catch (error) {
         console.error("Error uploading file:", error);
       }
@@ -73,7 +73,7 @@ const AddBookForm = () => {
 
     const book_data = { ...book_form };
 
-    //  the properties of book_data
+    // the properties of book_data
     book_data.added_by = user?._id as string;
     book_data.pages = Number(book_data.pages);
     book_data.rating = Number(book_data.rating);
@@ -108,7 +108,7 @@ const AddBookForm = () => {
     }
   };
 
-  //error and success handlaing
+  // error and success handling
   useEffect(() => {
     if (isError && error && "data" in error) {
       setIsAlertOpen(true);
@@ -125,11 +125,11 @@ const AddBookForm = () => {
   return (
     <form
       onSubmit={formSubmitHandler}
-      className=" my-4 mx-5 md:mx-0 flex  max-w-lg rounded-xl w-full  flex-col gap-4 bg-[#FFFFFF] px-7 md:px-14 py-6 "
+      className="my-4 mx-5 md:mx-0 flex max-w-lg rounded-xl w-full flex-col gap-4 bg-[#FFFFFF] px-7 md:px-14 py-6"
     >
       <h1
-        className=" text-primary  font-anton  text-[20px] md:text-[30px]   font-normal 
-                      leading-[30px] md:leading-[50px]  letter-spacing  text-center  "
+        className="text-primary font-anton text-[20px] md:text-[30px] font-normal 
+                      leading-[30px] md:leading-[50px] letter-spacing text-center"
       >
         Add new book
       </h1>
@@ -216,17 +216,16 @@ const AddBookForm = () => {
         {/* key_notes */}
 
         <TextArea
-          placeHolder="Key notes; Note:By comma separator you can add multiple notes"
+          placeHolder="Key notes; Note: By comma separator, you can add multiple notes"
           currentValue={book_form.keynotes.join(",")}
           onChange={(e) => inputChangeHandler(e, "keynotes")}
           required={true}
         />
 
         {/* Cover Image */}
-
         <FileInput
           label=""
-          onChange={(selectedFile: File | undefined) => {
+          onChange={(selectedFile) => {
             console.log("Selected file:", selectedFile);
             setFile(selectedFile);
           }}
@@ -250,7 +249,7 @@ const AddBookForm = () => {
           label="Publication Date"
         />
 
-        {/* {/* Rating */}
+        {/* Rating */}
         <RatingPicker
           current_value={book_form.rating}
           clickHandler={(value) =>
@@ -266,8 +265,8 @@ const AddBookForm = () => {
       <Button
         type="submit"
         title="Submit"
-        className="  bg-primary   w-full mx-auto py-[17px] md:py-[10px] px-10 mmd:px-14   
-					 text-base font-medium rounded"
+        className="bg-primary w-full mx-auto py-[17px] md:py-[10px] px-10 md:px-14 
+          text-base font-medium rounded"
         icon={isLoading && ICONS.button_loading_icon}
         isDisabled={isLoading}
       />
@@ -279,7 +278,7 @@ const AddBookForm = () => {
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className=" max-w-xs w-full absolute   top-20   right-0 flex justify-center"
+          className="max-w-xs w-full absolute top-20 right-0 flex justify-center"
         />
       )}
     </form>

@@ -201,7 +201,7 @@ const BookCard2 = ({ book }: { book: IBook }) => {
       {/* other items */}
       <div className="mt-[18px]">
         {/* title & rating  */}
-        <div className="flex items-center justify-between gap-5 px-4 ">
+        <div className="flex justify-between gap-5 px-4 ">
           <p className="text-primary font-inter  text-2xl font-medium    ">
             {book?.title} <span className="text-sm">by-{book.author}</span>
           </p>

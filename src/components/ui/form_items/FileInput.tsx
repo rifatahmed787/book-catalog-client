@@ -1,6 +1,6 @@
 import { DarkModeContext } from "@/components/DarkModeContext/DarkModeContext";
 import { cn } from "@/lib/utils";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 type FileInputProps = {
   label?: string;

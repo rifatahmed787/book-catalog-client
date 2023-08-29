@@ -93,8 +93,8 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
 
           {/* wishlist */}
           <li>
-            <a
-              href="#"
+            <Link
+              to="/wishlist"
               className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
                 darkMode ? "text-white" : "hover:bg-gray-100"
               }`}
@@ -104,20 +104,20 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
                 width={25}
               />
               WishList
-            </a>
+            </Link>
           </li>
 
           {/* reading list */}
           <li>
-            <a
-              href="#"
+            <Link
+              to="/reading-list"
               className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
                 darkMode ? "text-white" : "hover:bg-gray-100"
               }`}
             >
               <Icon icon="fluent-mdl2:reading-mode" width={20} />
               Reading List
-            </a>
+            </Link>
           </li>
 
           {/* checkout */}
