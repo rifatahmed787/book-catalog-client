@@ -270,7 +270,7 @@ const EditBookForm = ({ book_details }: { book_details: IBook }) => {
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className=" max-w-xs w-full absolute   top-20   right-0 flex justify-center"
+          className=" max-w-xs w-full absolute z-50  top-20   right-0 flex justify-center"
         />
       )}
     </form>

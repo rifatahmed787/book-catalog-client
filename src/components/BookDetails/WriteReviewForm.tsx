@@ -125,7 +125,7 @@ const WriteReviewForm = ({ book_info }: { book_info: IBook | undefined }) => {
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className=" max-w-md w-full absolute   -top-16   right-0 left-0 mx-auto flex justify-center"
+          className=" max-w-md w-full absolute -top-16  z-50 right-0 left-0 mx-auto flex justify-center"
         />
       )}
     </form>

@@ -183,7 +183,7 @@ const BookCard3 = ({
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className="absolute  top-0 left-0 right-0 mx-auto flex justify-center"
+          className="absolute  top-20 z-50 left-0 right-0 mx-auto flex justify-center"
         />
       )}
     </div>

@@ -54,11 +54,13 @@ const AddBookForm = () => {
 
     let imageUrl = "";
     if (file) {
+      console.log("this is the file data", file);
       const formData = new FormData();
       formData.append("image", file);
 
       try {
         const uploadResponse = await uploader({ data: formData });
+        console.log("this is the url data", uploadResponse);
         if (uploadResponse) {
           if ("data" in uploadResponse) {
             imageUrl = uploadResponse.data.images[0];
@@ -278,7 +280,7 @@ const AddBookForm = () => {
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className="max-w-xs w-full absolute top-20 right-0 flex justify-center"
+          className="max-w-xs w-full absolute top-48 right-0 flex justify-center z-50"
         />
       )}
     </form>

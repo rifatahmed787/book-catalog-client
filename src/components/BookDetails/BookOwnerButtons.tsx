@@ -86,7 +86,7 @@ const BookOwnerButtons = ({ book_info }: IBookOwnerButtons) => {
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className=" max-w-xs w-full absolute   top-20   right-0 flex justify-center"
+          className=" max-w-xs w-full absolute   top-20 z-50 right-0 flex justify-center"
         />
       )}
     </div>

@@ -159,7 +159,7 @@ const BookInfo = ({ book_info }: { book_info: IBook | undefined }) => {
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className="absolute  top-20 left-0 right-0 mx-auto flex justify-center"
+          className="absolute  top-20 z-50 left-0 right-0 mx-auto flex justify-center"
         />
       )}
     </div>

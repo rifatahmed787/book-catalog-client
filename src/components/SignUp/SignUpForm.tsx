@@ -10,9 +10,9 @@ import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 import FileInput from "../ui/form_items/FileInput";
 
 const SignUpForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   // signup mutation hook
-  const [register, { isLoading, isError, error, isSuccess }] =
-    useRegisterMutation();
+  const [register, { isError, error, isSuccess }] = useRegisterMutation();
 
   const [uploader] = useUploderMutation();
 
@@ -38,6 +38,7 @@ const SignUpForm = () => {
   //formSubmitHandler
   const formSubmitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     let imageUrl = "";
     if (file) {
@@ -70,6 +71,7 @@ const SignUpForm = () => {
         imageUrl,
       },
     });
+    setIsLoading(false);
   };
 
   // Input handler
@@ -221,7 +223,7 @@ const SignUpForm = () => {
             messages={AlertMessages}
             isAlertOpen={isAlertOpen}
             setIsAlertOpen={setIsAlertOpen}
-            className="absolute top-0 left-0 right-0 mx-auto flex justify-center"
+            className="absolute top-20 z-50 left-0 right-0 mx-auto flex justify-center"
           />
         )}
       </form>

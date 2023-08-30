@@ -139,7 +139,7 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`bg-primary shadow-lg top-0 z-50 w-full transition duration-500 px-5 ${
+        className={`bg-primary shadow-lg top-0 z-40 w-full transition duration-500 px-5 ${
           darkMode ? "bg-gradient-backdrop" : ""
         } ${scrolled ? "dropdown-menu fixed" : "droptop-menu sticky"} `}
       >
