@@ -1,6 +1,6 @@
 ### Book Catalog Frontend
 
-![Alt text](image-1.png)
+![Alt text](image.png)
 
 ### Introduction
 
@@ -20,4 +20,4 @@ descriptions, and manage their reading lists effectively.
 https://bookscatalog.vercel.app
 ```
 
-![Alt text](image.png)
+![Alt text](image-1.png)
