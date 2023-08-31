@@ -118,7 +118,10 @@ const BannerSwiper = () => {
                   <div className="my-3 md:px-5 flex justify-center items-center gap-5 ">
                     <div>
                       <Link to="/">
-                        <BrandButton text="Buy Now >>" />
+                        <BrandButton
+                          text="Buy Now"
+                          icon={<Icon icon="ic:baseline-greater-than" />}
+                        />
                       </Link>
                     </div>
                     <div>
@@ -169,7 +172,10 @@ const BannerSwiper = () => {
                   <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-center">
                     <div>
                       <Link to="/">
-                        <BrandButton text="Buy Now >>" />
+                        <BrandButton
+                          text="Buy Now"
+                          icon={<Icon icon="ic:baseline-greater-than" />}
+                        />
                       </Link>
                     </div>
                     <div>
@@ -216,7 +222,10 @@ const BannerSwiper = () => {
                   <div className="my-3 md:px-5 flex justify-center items-center gap-5 ">
                     <div>
                       <Link to="/">
-                        <BrandButton text="Buy Now >>" />
+                        <BrandButton
+                          text="Buy Now"
+                          icon={<Icon icon="ic:baseline-greater-than" />}
+                        />
                       </Link>
                     </div>
                     <div>
@@ -266,7 +275,10 @@ const BannerSwiper = () => {
                   <div className="my-3 md:px-5 flex justify-center items-center gap-5 md:justify-center">
                     <div>
                       <Link to="/">
-                        <BrandButton text="Buy Now >>" />
+                        <BrandButton
+                          text="Buy Now"
+                          icon={<Icon icon="ic:baseline-greater-than" />}
+                        />
                       </Link>
                     </div>
                     <div>
