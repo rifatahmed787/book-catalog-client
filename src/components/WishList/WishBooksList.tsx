@@ -5,45 +5,37 @@ import { IWish } from "@/types/Wish";
 import BookCard3 from "../ui/BookCard3";
 
 export default function WishBooksList() {
-	// Get books query
-	const {
-		data: books,
-		isLoading,
-		isError,
-		error,
-	} = useGetWishListQuery({});
+  // Get books query
+  const { data: books, isLoading, isError, error } = useGetWishListQuery({});
 
-	const books_list_data = books?.data;
+  const books_list_data = books?.data;
 
-	return (
-		<div className="bg-[#FAF9F5] min-h-[70vh] px-4  py-10 ">
-			<div className=" max-w-[1170px] mx-auto">
-				{/* Books list  */}
-				{isLoading ? (
-					<BookListSkeleton />
-				) : (
-					<div className=" mt-10 w-full   grid grid-cols-1   sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 ">
-						{!isError &&
-							!error &&
-							books_list_data?.length > 0 &&
-							books_list_data.map(
-								(book: IWish) => {
-									return (
-										<BookCard3
-											key={
-												book._id
-											}
-											wish_book={
-												book
-											}
-										/>
-									);
-								}
-							)}
-					</div>
-				)}
-			</div>
-		</div>
-	);
+  return (
+    <div className="bg-[#FAF9F5] min-h-[70vh] px-4  py-10 ">
+      <div className=" max-w-[1170px] mx-auto">
+        {books_list_data?.length > 0 ? (
+          ""
+        ) : (
+          <>
+            <h1 className="text-xl text-center font-bold">
+              WishList is <span className="text-primary">Empty!</span>
+            </h1>
+          </>
+        )}
+        {/* Books list  */}
+        {isLoading ? (
+          <BookListSkeleton />
+        ) : (
+          <div className=" mt-10 w-full   grid grid-cols-1   sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 ">
+            {!isError &&
+              !error &&
+              books_list_data?.length > 0 &&
+              books_list_data.map((book: IWish) => {
+                return <BookCard3 key={book._id} wish_book={book} />;
+              })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
-

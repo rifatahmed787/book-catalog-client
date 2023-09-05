@@ -87,7 +87,7 @@ const BookInfo = ({ book_info }: { book_info: IBook | undefined }) => {
       {/* Main button */}
       <div className="flex items-center justify-between flex-wrap gap-5">
         <Button
-          title="Start reading"
+          title="Read Now"
           className=" mt-7 text-primary text-base  font-semibold border border-black hover:bg-primary hover:text-white duration-300 hover:border-primary  px-[40px] md:px-[40px]  py-[10px]  md:py-[15px] "
           onClickHandler={addInToReadListHandler}
           icon={isAddToReadLoading ? ICONS.button_loading_icon : undefined}

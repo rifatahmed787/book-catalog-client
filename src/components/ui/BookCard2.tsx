@@ -15,6 +15,7 @@ const BookCard2 = ({ book }: { book: IBook }) => {
   const [isLoveHovered, setIsLoveHovered] = useState(false);
   const [isViewHovered, setIsViewHovered] = useState(false);
   const [isCompareHovered, setIsCompareHovered] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   // add in wish mutation hook
@@ -94,7 +95,9 @@ const BookCard2 = ({ book }: { book: IBook }) => {
 
   // card Click Handler
   const cardClickHandler = () => {
+    setIsLoading(true);
     navigate(`/books/${book?._id}`);
+    setIsLoading(false);
   };
 
   return (
@@ -152,7 +155,7 @@ const BookCard2 = ({ book }: { book: IBook }) => {
                     : "bg-white text-primary "
                 }`}
               >
-                {isAddToWisLoading ? (
+                {isLoading ? (
                   ICONS.button_loading_icon
                 ) : (
                   <>
@@ -178,7 +181,7 @@ const BookCard2 = ({ book }: { book: IBook }) => {
                     : "bg-white text-primary "
                 }`}
               >
-                {isAddToWisLoading ? (
+                {isLoading ? (
                   ICONS.button_loading_icon
                 ) : (
                   <>
@@ -232,7 +235,7 @@ const BookCard2 = ({ book }: { book: IBook }) => {
 					gap-2  "
           onClick={addInToReadListHandler}
         >
-          Start reading
+          Read Now
           {isAddToReadLoading ? ICONS.button_loading_icon : ""}
         </button>
         <button className="text-xm text-primary hover:text-white hover:bg-primary duration-500 px-6 py-1 border ">

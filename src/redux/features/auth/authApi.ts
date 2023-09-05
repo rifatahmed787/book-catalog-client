@@ -10,7 +10,7 @@ export const authAPi = apiSlice.injectEndpoints({
 
     register: builder.mutation({
       query: ({ data }) => ({
-        url: "auth/signup",
+        url: "/auth/signup",
         method: "POST",
         body: { ...data },
       }),
@@ -45,7 +45,7 @@ export const authAPi = apiSlice.injectEndpoints({
     // log in
     login: builder.mutation({
       query: ({ data }) => ({
-        url: "auth/login",
+        url: "/auth/login",
         method: "POST",
         body: data,
       }),

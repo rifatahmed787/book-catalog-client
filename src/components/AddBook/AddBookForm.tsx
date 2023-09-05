@@ -19,7 +19,8 @@ const AddBookForm = () => {
   // Add book mutation hook
   const [addBok, { data: new_book_data, isError, error, isSuccess }] =
     useAddBookMutation();
-  const [uploader] = useUploderMutation();
+  const [uploader, { isError: uploadError, error: uploadingError }] =
+    useUploderMutation();
 
   // Alert State
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -123,6 +124,12 @@ const AddBookForm = () => {
       setAlertMessages(new_book_data?.message);
     }
   }, [error, isError, isSuccess]);
+  useEffect(() => {
+    if (uploadError && uploadingError) {
+      setIsAlertOpen(true);
+      setAlertType("error");
+    }
+  });
 
   return (
     <form

@@ -8,6 +8,7 @@ const Home = () => {
       <div className="bg-white pt-[210px]  md:pt-[283px] pb-[100px] -mt-[190px]">
         <LatestBooks />
       </div>
+      <div></div>
     </div>
   );
 };

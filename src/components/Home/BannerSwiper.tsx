@@ -59,12 +59,6 @@ const BannerSwiper = () => {
     }
   };
 
-  const handleTransitionEnd = () => {
-    if (textRef.current) {
-      textRef.current.classList.remove("banner-zoom");
-    }
-  };
-
   return (
     <>
       <Swiper
@@ -84,7 +78,6 @@ const BannerSwiper = () => {
           darkMode ? "bg-gradient-backdrop" : ""
         }`}
         onSlideChange={handleSlideChange}
-        onTransitionEnd={handleTransitionEnd}
       >
         {/* Slide 1 */}
         <SwiperSlide>

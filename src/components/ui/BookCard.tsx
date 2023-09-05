@@ -15,6 +15,7 @@ const BookCard = ({ book }: { book: IBook }) => {
   const [isViewHovered, setIsViewHovered] = useState(false);
   const [isCompareHovered, setIsCompareHovered] = useState(false);
   const { user, isLoggedIn } = useAppSelector((state) => state.auth);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   // add in wish mutation hook
@@ -51,6 +52,10 @@ const BookCard = ({ book }: { book: IBook }) => {
   //wishListHandler
   const wishListHandler = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
+    console.log("Request Payload:", {
+      book_id: book?._id,
+      user_id: user?._id,
+    });
 
     isLoggedIn
       ? addBookInWish({
@@ -59,7 +64,7 @@ const BookCard = ({ book }: { book: IBook }) => {
         })
       : navigate("/auth/signin");
   };
-  //Addin to readlist handler
+  //Add to readlist handler
   const addInToReadListHandler = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
     isLoggedIn
@@ -98,7 +103,9 @@ const BookCard = ({ book }: { book: IBook }) => {
 
   // card Click Handler
   const cardClickHandler = () => {
+    setIsLoading(true);
     navigate(`/books/${book?._id}`);
+    setIsLoading(false);
   };
 
   return (
@@ -147,7 +154,6 @@ const BookCard = ({ book }: { book: IBook }) => {
 
               {/* quick view button  */}
               <button
-                onClick={() => cardClickHandler()}
                 onMouseEnter={() => setIsViewHovered(true)}
                 onMouseLeave={() => setIsViewHovered(false)}
                 className={`flex justify-center items-center gap-1 text-center  w-10 h-10 rounded-full overflow-hidden relative transition-all duration-300 hover:w-28 ${
@@ -156,7 +162,7 @@ const BookCard = ({ book }: { book: IBook }) => {
                     : "bg-white text-primary "
                 }`}
               >
-                {isAddToWisLoading ? (
+                {isLoading ? (
                   ICONS.button_loading_icon
                 ) : (
                   <>
@@ -182,7 +188,7 @@ const BookCard = ({ book }: { book: IBook }) => {
                     : "bg-white text-primary "
                 }`}
               >
-                {isAddToWisLoading ? (
+                {isLoading ? (
                   ICONS.button_loading_icon
                 ) : (
                   <>
@@ -210,7 +216,7 @@ const BookCard = ({ book }: { book: IBook }) => {
             {book?.title} <span className="text-sm">by-{book.author}</span>
           </p>
 
-          <p className="text-primary font-inter border-none text-xl text-right font-bold flex items-center gap-2 ">
+          <p className="text-primary font-inter border-none text-sm text-right font-bold flex items-center gap-2 ">
             {Array.from({ length: book.rating }, (_, index) => (
               <span key={index}>{ICONS.star_icon}</span>
             ))}
@@ -236,7 +242,7 @@ const BookCard = ({ book }: { book: IBook }) => {
 					gap-2  "
           onClick={addInToReadListHandler}
         >
-          Start reading
+          Read Now
           {isAddToReadLoading ? ICONS.button_loading_icon : ""}
         </button>
         <button className="text-xm text-primary hover:text-white hover:bg-primary duration-500 px-6 py-1 border ">
@@ -259,29 +265,3 @@ const BookCard = ({ book }: { book: IBook }) => {
 };
 
 export default BookCard;
-
-/* 
-style="position: relative; overflow: hidden; height: 362px;
-
-
-1.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px);"
-
-2.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(263px, 0px, 0px);"
-
-3.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(526px, 0px, 0px);"
-
-4.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(789px, 0px, 0px);"
-
-5.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(1052px, 0px, 0px);"
-
-6.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 181px, 0px);"
-
-7.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(263px, 181px, 0px);"
-
-8. style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(526px, 181px, 0px);"
-
-9.style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(789px, 181px, 0px);"
-
-10. style="width: 263px; height: 258px; position: absolute; left: 0px; top: 0px; transform: translate3d(1052px, 181px, 0px);"
-
-*/
