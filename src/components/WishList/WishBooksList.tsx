@@ -3,15 +3,22 @@ import BookListSkeleton from "./BookListSkeleton";
 import { useGetWishListQuery } from "@/redux/features/wish/wishApi";
 import { IWish } from "@/types/Wish";
 import BookCard3 from "../ui/BookCard3";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
+import { useContext } from "react";
 
 export default function WishBooksList() {
+  const { darkMode } = useContext(DarkModeContext);
   // Get books query
   const { data: books, isLoading, isError, error } = useGetWishListQuery({});
 
   const books_list_data = books?.data;
 
   return (
-    <div className="bg-[#FAF9F5] min-h-[70vh] px-4  py-10 ">
+    <div
+      className={`bg-[#FAF9F5] min-h-[70vh] px-4  py-10 ${
+        darkMode ? "bg-black" : ""
+      }`}
+    >
       <div className=" max-w-[1170px] mx-auto">
         {books_list_data?.length > 0 ? (
           ""

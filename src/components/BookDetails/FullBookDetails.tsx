@@ -3,14 +3,16 @@ import BookImagesCarousel from "../ui/BookImagesCarousel";
 import BookInfo from "../ui/BookInfo";
 import ReviewSection from "./ReviewSection";
 import { useGetBookDetailsQuery } from "@/redux/features/book/bookApi";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { IBook } from "@/types/Book";
 import BookDetailsSkeleton from "./BookDetailsSkeleton";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { IUser } from "@/types/User";
 import BookOwnerButtons from "./BookOwnerButtons";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 
 const FullBookDetails = () => {
+  const { darkMode } = useContext(DarkModeContext);
   const { bookID } = useParams();
 
   // user state from redux
@@ -36,7 +38,11 @@ const FullBookDetails = () => {
   const book_added_by: IUser = book_details?.added_by as IUser;
 
   return (
-    <div className=" min-h-screen bg-[#FAF9F5] w-full py-8 md:py-20">
+    <div
+      className={`min-h-screen bg-[#FAF9F5] w-full py-8 md:py-20 ${
+        darkMode ? "bg-black" : ""
+      }`}
+    >
       {!isLoading &&
         !isError &&
         isLoggedIn &&

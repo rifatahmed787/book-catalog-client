@@ -6,8 +6,11 @@ import BookCard2 from "../ui/BookCard2";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BookListSkeleton from "./BookListSkeleton";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
+import { useContext } from "react";
 
 export default function BooksList() {
+  const { darkMode } = useContext(DarkModeContext);
   // params
   const location = useLocation();
   const [searchParams] = useSearchParams();
@@ -44,7 +47,11 @@ export default function BooksList() {
   const books_lis_data = books?.data?.data;
 
   return (
-    <div className="bg-[#FAF9F5] min-h-[70vh] px-4  py-20 ">
+    <div
+      className={`bg-[#FAF9F5] min-h-[70vh] px-4  py-20 ${
+        darkMode ? "bg-black" : ""
+      }`}
+    >
       <div className=" max-w-[1170px] mx-auto">
         {/* Filter & and add book button */}
 

@@ -33,7 +33,7 @@ const customTheme: CustomFlowbiteTheme = {
         auto: "border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white",
       },
       target:
-        " h-8 w-30 px-3 py-2 rounded-3xl text-lg bg-transparent text-[#000] hover:bg-[#000] text-[#000]  hover:text-white   border border-primary text-center ",
+        " h-8 w-30 px-3 py-2 rounded-3xl text-lg bg-transparent text-[#000] hover:bg-[#000] text-gray-500  hover:text-white   border border-primary text-center ",
     },
     inlineWrapper: "",
   },

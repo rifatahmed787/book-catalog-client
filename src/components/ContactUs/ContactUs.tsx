@@ -16,7 +16,7 @@ const ContactUs = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className={`pb-10 ${darkMode ? "bg-gradient-backdrop" : ""}`}>
+    <div className={`pb-10 ${darkMode ? "bg-black" : ""}`}>
       <div
         className={` grid justify-items-center items-center lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 py-10 mt-10 mx-3 md:mx-8  ${
           darkMode ? "bg-gradient-backdrop text-white rounded-md" : ""

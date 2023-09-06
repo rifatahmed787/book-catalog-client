@@ -3,15 +3,22 @@ import BookListSkeleton from "./BookListSkeleton";
 import { useGetReadingListQuery } from "@/redux/features/reading/readingApi";
 import BookCard3 from "../ui/BookCard3";
 import { IReading } from "@/types/Reading";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
+import { useContext } from "react";
 
 export default function ReadingBooksList() {
+  const { darkMode } = useContext(DarkModeContext);
   // Get books query
   const { data: books, isLoading, isError, error } = useGetReadingListQuery({});
 
   const books_lis_data = books?.data;
 
   return (
-    <div className="bg-[#FAF9F5] min-h-[70vh] px-4  py-16 ">
+    <div
+      className={`bg-[#FAF9F5] min-h-[70vh] px-4  py-16 ${
+        darkMode ? "bg-black" : ""
+      }`}
+    >
       <div className=" max-w-[1170px] mx-auto">
         {/* Books list  */}
         {books_lis_data?.length > 0 ? (

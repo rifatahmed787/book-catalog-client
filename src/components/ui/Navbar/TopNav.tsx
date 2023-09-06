@@ -1,8 +1,15 @@
+import { DarkModeContext } from "@/components/DarkModeContext/DarkModeContext";
 import { Icon } from "@iconify/react"; // icon
+import { useContext } from "react";
 
 const TopNav = () => {
+  const { darkMode } = useContext(DarkModeContext);
   return (
-    <div className="md:block hidden bg-secondary text-white h-8  px-5">
+    <div
+      className={`md:block hidden bg-secondary text-white h-8  px-5 ${
+        darkMode ? "bg-black text-white" : ""
+      }`}
+    >
       <div className="top-nav flex overflow-hidden items-center justify-between pt-1">
         {/* Left Side: Text Animation */}
         <div>

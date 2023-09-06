@@ -3,14 +3,16 @@ import { get_error_messages } from "@/lib/error_messages";
 import { useAddBookInWishMutation } from "@/redux/features/wish/wishApi";
 import ICONS from "@/shared/AllIcons";
 import { IBook } from "@/types/Book";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ToastContainer from "./Toast";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { useAddBookInReadingListMutation } from "@/redux/features/reading/readingApi";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 
 const BookCard2 = ({ book }: { book: IBook }) => {
+  const { darkMode } = useContext(DarkModeContext);
   const { user, isLoggedIn } = useAppSelector((state) => state.auth);
   const [isLoveHovered, setIsLoveHovered] = useState(false);
   const [isViewHovered, setIsViewHovered] = useState(false);
@@ -102,7 +104,9 @@ const BookCard2 = ({ book }: { book: IBook }) => {
 
   return (
     <div
-      className=" relative bg-white shadow-md w-[370px] overflow-hidden h-[498px] flex flex-col cursor-pointer "
+      className={`relative bg-white shadow-md w-[370px] overflow-hidden h-[498px] flex flex-col cursor-pointer ${
+        darkMode ? "bg-gradient-backdrop" : ""
+      }`}
       onClick={() => cardClickHandler()}
     >
       {/* Image */}
@@ -219,10 +223,18 @@ const BookCard2 = ({ book }: { book: IBook }) => {
         {/*  */}
 
         <div className="my-[27px] px-4 flex items-center justify-between gap-3 flex-wrap">
-          <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
+          <p
+            className={`text-[#3C3C3C] font-inter  text-base font-normal ${
+              darkMode ? "text-gray-300" : ""
+            }`}
+          >
             {book.publication_date}
           </p>
-          <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
+          <p
+            className={`text-[#3C3C3C] font-inter  text-base font-normal ${
+              darkMode ? "text-gray-300" : ""
+            }`}
+          >
             pages: {book.pages}
           </p>
         </div>

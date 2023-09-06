@@ -2,14 +2,16 @@ import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import Button from "../ui/Button";
 import ToastContainer from "../ui/Toast";
 import TextInput from "../ui/form_items/TextInput";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { get_error_messages } from "@/lib/error_messages";
 import ICONS from "@/shared/AllIcons";
 import { Link } from "react-router-dom";
 import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 import FileInput from "../ui/form_items/FileInput";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 
 const SignUpForm = () => {
+  const { darkMode } = useContext(DarkModeContext);
   const [isLoading, setIsLoading] = useState(false);
   // signup mutation hook
   const [register, { isError, error, isSuccess }] = useRegisterMutation();
@@ -97,15 +99,19 @@ const SignUpForm = () => {
   }, [error, isError, isSuccess]);
 
   return (
-    <div className="min-h-screen w-full    bg-box-pattern  flex items-center justify-center ">
+    <div
+      className={`min-h-screen w-full  flex items-center justify-center ${
+        darkMode ? "bg-black" : "bg-box-pattern "
+      }`}
+    >
       <form
         onSubmit={formSubmitHandler}
-        className=" relative flex  max-w-lg rounded-xl w-full  flex-col gap-4 backdrop-blur-3xl bg-white/80 mx-5 px-5 md:px-[74px] py-7"
-        encType="multipart/form-data"
+        className={`relative flex  max-w-lg rounded-xl w-full  flex-col gap-4 backdrop-blur-3xl bg-white/80 mx-5 px-5 md:px-[74px] py-7"
+        encType="multipart/form-data ${darkMode ? "bg-gradient-backdrop" : ""}`}
       >
         {/* title */}
         <div className="flex items-center justify-between gap-3 flex-wrap ">
-          <h1 className=" text-4xl  font-anton text-ceter text-primary">
+          <h1 className=" text-4xl  font-anton text-ceter text-primary pt-1">
             Signup
           </h1>
 
@@ -206,7 +212,11 @@ const SignUpForm = () => {
         />
 
         <div>
-          <p className="font-inter text-base text-[#000] text-center ">
+          <p
+            className={`font-inter text-base text-[#000] text-center ${
+              darkMode ? "text-gray-300 pb-3" : ""
+            }`}
+          >
             Already have account?
             <Link to={"/auth/signin"}>
               <a className="ml-2  underline" href="">

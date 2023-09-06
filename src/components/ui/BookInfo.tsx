@@ -7,11 +7,13 @@ import { useAppSelector } from "@/hooks/reduxHook";
 import RatingPicker from "./form_items/RatingPicker";
 import { useNavigate } from "react-router-dom";
 import { useAddBookInReadingListMutation } from "@/redux/features/reading/readingApi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { get_error_messages } from "@/lib/error_messages";
 import ToastContainer from "./Toast";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 
 const BookInfo = ({ book_info }: { book_info: IBook | undefined }) => {
+  const { darkMode } = useContext(DarkModeContext);
   const { isLoggedIn, user } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -64,7 +66,11 @@ const BookInfo = ({ book_info }: { book_info: IBook | undefined }) => {
   ]);
 
   return (
-    <div className="h-full w-full min-h-[200px] border-[5px] border-white bg-[#EAE3D1] p-9">
+    <div
+      className={`h-full w-full min-h-[200px] border-[5px] border-white bg-[#EAE3D1] p-9 ${
+        darkMode ? "bg-gradient-backdrop" : ""
+      }`}
+    >
       {/* title */}
       <h2 className=" text-primary font-anton text-[40px] font-normal leading-[50px]">
         {book_info?.title}
@@ -79,7 +85,11 @@ const BookInfo = ({ book_info }: { book_info: IBook | undefined }) => {
           DESCRIPTION :
         </p>
 
-        <p className="text-[#656565] text-[16px] font-inter font-medium leading-[25px] mt-[6px]">
+        <p
+          className={`text-[#656565] text-[16px] font-inter font-medium leading-[25px] mt-[6px] ${
+            darkMode ? "text-gray-300" : ""
+          }`}
+        >
           {book_info?.description}
         </p>
       </div>
@@ -88,7 +98,9 @@ const BookInfo = ({ book_info }: { book_info: IBook | undefined }) => {
       <div className="flex items-center justify-between flex-wrap gap-5">
         <Button
           title="Read Now"
-          className=" mt-7 text-primary text-base  font-semibold border border-black hover:bg-primary hover:text-white duration-300 hover:border-primary  px-[40px] md:px-[40px]  py-[10px]  md:py-[15px] "
+          className={`mt-7 text-primary text-base  font-semibold border border-black hover:bg-primary hover:text-white duration-300 hover:border-primary  px-[40px] md:px-[40px]  py-[10px]  md:py-[15px] ${
+            darkMode ? "border-white" : ""
+          }`}
           onClickHandler={addInToReadListHandler}
           icon={isAddToReadLoading ? ICONS.button_loading_icon : undefined}
         />

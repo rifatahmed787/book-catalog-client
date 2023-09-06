@@ -3,9 +3,10 @@ import ICONS from "@/shared/AllIcons";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import FilterDropDown from "./FilterDropDown";
 import { useGetUniqueFilteringItemsQuery } from "@/redux/features/book/bookApi";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import BookSearchbar from "./BookSearchbar";
 import BrandButton from "../BrandButton/BrandButton";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 
 type IFilterBook = {
   filter: { genre: string; year: string; search: string };
@@ -18,6 +19,7 @@ type IFilterBook = {
   >;
 };
 const FilterBook = ({ filter }: IFilterBook) => {
+  const { darkMode } = useContext(DarkModeContext);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -69,7 +71,9 @@ const FilterBook = ({ filter }: IFilterBook) => {
         <div className=" flex items-center justify-start flex-wrap gap-[10px]  ">
           <button
             className={[
-              "h-8 px-6   rounded-3xl text-lg text-[#000] border border-primary text-center hover:bg-[#155e75] hover:text-white ",
+              `h-8 px-6   rounded-3xl text-lg text-[#000] border border-primary text-center hover:bg-[#155e75] hover:text-white ${
+                darkMode ? "text-gray-500" : ""
+              }`,
             ].join(" ")}
             onClick={() => {
               setSearchParams({});

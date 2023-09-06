@@ -3,13 +3,14 @@ import { get_error_messages } from "@/lib/error_messages";
 import { useDeleteBookFromWishMutation } from "@/redux/features/wish/wishApi";
 import ICONS from "@/shared/AllIcons";
 import { IBook } from "@/types/Book";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ToastContainer from "./Toast";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { useRemoveBookFromReadingListMutation } from "@/redux/features/reading/readingApi";
 import { useNavigate } from "react-router-dom";
 import { IWish } from "@/types/Wish";
 import { IReading } from "@/types/Reading";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 
 const BookCard3 = ({
   wish_book,
@@ -18,6 +19,7 @@ const BookCard3 = ({
   wish_book?: IWish;
   reading_book?: IReading;
 }) => {
+  const { darkMode } = useContext(DarkModeContext);
   const book: IBook = wish_book
     ? (wish_book?.book_id as IBook)
     : (reading_book?.book_id as IBook);
@@ -116,7 +118,9 @@ const BookCard3 = ({
 
   return (
     <div
-      className=" relative bg-white shadow-md w-[370px] overflow-hidden h-[498px] flex flex-col cursor-pointer "
+      className={`relative bg-white shadow-md w-[370px] overflow-hidden h-[498px] flex flex-col cursor-pointer ${
+        darkMode ? "bg-gradient-backdrop" : ""
+      }`}
       onClick={() => cardClickHandler()}
     >
       {/* Image */}
@@ -149,10 +153,18 @@ const BookCard3 = ({
         {/*  */}
 
         <div className="my-[27px] px-4 flex items-center justify-between gap-3 flex-wrap">
-          <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
+          <p
+            className={`text-[#3C3C3C] font-inter  text-base font-normal ${
+              darkMode ? "text-gray-300" : ""
+            }`}
+          >
             {book.publication_date}
           </p>
-          <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
+          <p
+            className={`text-[#3C3C3C] font-inter  text-base font-normal ${
+              darkMode ? "text-gray-300" : ""
+            }`}
+          >
             pages: {book.pages}
           </p>
         </div>
@@ -162,8 +174,8 @@ const BookCard3 = ({
       <div className="  border-t border-primary p-[10px]  h-14 px-4  flex items-center justify-center mt-auto">
         {!wish_book && (
           <button
-            className="text-[#3C3C3C] font-inter h-full  text-lg font-semibold flex items-center 
-					gap-2  "
+            className={`text-[#3C3C3C] font-inter h-full  text-lg font-semibold flex items-center 
+            gap-2 ${darkMode ? "text-gray-300" : ""}`}
             onClick={ReadListHandler}
           >
             Remove From ReadingList
@@ -174,8 +186,8 @@ const BookCard3 = ({
         )}
         {!reading_book && (
           <button
-            className="text-[#3C3C3C] font-inter h-full  text-lg font-semibold flex items-center 
-					gap-2"
+            className={`text-[#3C3C3C] font-inter h-full  text-lg font-semibold flex items-center 
+            gap-2 ${darkMode ? "text-gray-300" : ""}`}
             onClick={wishListHandler}
           >
             Remove From WishList

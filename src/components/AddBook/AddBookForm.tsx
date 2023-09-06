@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Button from "../ui/Button";
 import TextInput from "../ui/form_items/TextInput";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ToastContainer from "../ui/Toast";
 import ICONS from "@/shared/AllIcons";
 import { get_error_messages } from "@/lib/error_messages";
@@ -11,8 +11,10 @@ import { useAddBookMutation } from "@/redux/features/book/bookApi";
 import RatingPicker from "../ui/form_items/RatingPicker";
 import FileInput from "../ui/form_items/FileInput";
 import { useUploderMutation } from "@/redux/features/upload/uploadApi";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 
 const AddBookForm = () => {
+  const { darkMode } = useContext(DarkModeContext);
   // user details
   const { user } = useAppSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
@@ -134,7 +136,9 @@ const AddBookForm = () => {
   return (
     <form
       onSubmit={formSubmitHandler}
-      className="my-4 mx-5 md:mx-0 flex max-w-lg rounded-xl w-full flex-col gap-4 bg-[#FFFFFF] px-7 md:px-14 py-6"
+      className={`my-4 mx-5 md:mx-0 flex max-w-lg rounded-xl w-full flex-col gap-4 bg-[#FFFFFF] px-7 md:px-14 py-6 ${
+        darkMode ? "bg-gradient-backdrop" : ""
+      }`}
     >
       <h1
         className="text-primary font-anton text-[20px] md:text-[30px] font-normal 
