@@ -25,7 +25,11 @@ export default function ReadingBooksList() {
           ""
         ) : (
           <>
-            <h1 className="text-xl text-center font-bold">
+            <h1
+              className={`text-xl text-center font-bold ${
+                darkMode ? "text-gray-300" : ""
+              }`}
+            >
               Reding List is <span className="text-primary">Empty!</span>
             </h1>
           </>

@@ -24,7 +24,11 @@ export default function WishBooksList() {
           ""
         ) : (
           <>
-            <h1 className="text-xl text-center font-bold">
+            <h1
+              className={`text-xl text-center font-bold ${
+                darkMode ? "text-gray-300" : ""
+              }`}
+            >
               WishList is <span className="text-primary">Empty!</span>
             </h1>
           </>
