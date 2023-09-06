@@ -9,8 +9,8 @@ const Home = () => {
     <div>
       <BannerSwiper />
       <div
-        className={`bg-white pt-[210px]  md:pt-[283px] pb-[100px] -mt-[190px] ${
-          darkMode ? "bg-black" : ""
+        className={` pt-[210px]  md:pt-[283px] pb-[100px] -mt-[190px] ${
+          darkMode ? "bg-black" : "bg-white"
         }`}
       >
         <LatestBooks />

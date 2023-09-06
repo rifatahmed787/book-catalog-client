@@ -6,8 +6,8 @@ const TopNav = () => {
   const { darkMode } = useContext(DarkModeContext);
   return (
     <div
-      className={`md:block hidden bg-secondary text-white h-8  px-5 ${
-        darkMode ? "bg-black text-white" : ""
+      className={`md:block hidden  text-white h-8  px-5 ${
+        darkMode ? "bg-black text-white" : "bg-secondary"
       }`}
     >
       <div className="top-nav flex overflow-hidden items-center justify-between pt-1">
