@@ -116,62 +116,70 @@ const BookCard3 = ({
 
   return (
     <div
-      className=" relative bg-transparent w-full h-[498px] border border-[#000] flex flex-col   cursor-pointer  "
+      className=" relative bg-white shadow-md w-[370px] overflow-hidden h-[498px] flex flex-col cursor-pointer "
       onClick={() => cardClickHandler()}
     >
       {/* Image */}
-      <img
-        src={book?.cover_image}
-        className="w-full  h-[274px]  object-cover overflow-hidden  border-b border-[#000]  "
-        alt=""
-      />
+
+      <div className="group h-[300px] overflow-hidden border-[5px] border-white">
+        <div className="block shadow-lg relative after:absolute after:content-normal group-hover:after:bg-black/60 after:left-0 after:top-0 after:w-full after:h-full after:duration-700">
+          <img
+            src={book?.cover_image}
+            className="w-full h-full object-cover transition-transform transform group-hover:scale-110 duration-300"
+            alt=""
+          />
+        </div>
+      </div>
+
       {/* other items */}
       <div className="mt-[18px]">
         {/* title & rating  */}
-        <div className="flex items-center justify-between gap-[24px] px-4 ">
-          <p className="text-[#3C3C3C] font-inter  text-2xl font-medium    ">
-            {book?.title}
+        <div className="flex justify-between gap-5 px-4 ">
+          <p className="text-primary font-inter  text-2xl font-medium    ">
+            {book?.title} <span className="text-sm">by-{book.author}</span>
           </p>
 
-          <p className="text-[#3C3C3C] font-inter  text-xl  text-right font-bold  flex items-center gap-2 ">
-            {ICONS.star_icon} {book?.rating}
+          <p className="text-primary font-inter border-none text-xl text-right font-bold flex items-center gap-2 ">
+            {Array.from({ length: book.rating }, (_, index) => (
+              <span key={index}>{ICONS.star_icon}</span>
+            ))}
+            {book.rating}
           </p>
         </div>
         {/*  */}
 
-        <div className="my-[27px] px-4 flex items-center justify-start gap-3 flex-wrap">
+        <div className="my-[27px] px-4 flex items-center justify-between gap-3 flex-wrap">
           <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
-            {book?.publication_date}
+            {book.publication_date}
           </p>
           <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
-            {book?.pages} pages
-          </p>
-          <p className="text-[#3C3C3C] font-inter  text-base font-normal   ">
-            by-{book?.author}
+            pages: {book.pages}
           </p>
         </div>
       </div>
 
       {/* buttons*/}
-      <div className="  border-t border-[#000] p-[10px]  h-14 px-4  flex items-center justify-between mt-auto">
+      <div className="  border-t border-primary p-[10px]  h-14 px-4  flex items-center justify-center mt-auto">
         {!wish_book && (
           <button
             className="text-[#3C3C3C] font-inter h-full  text-lg font-semibold flex items-center 
 					gap-2  "
             onClick={ReadListHandler}
           >
-            Remove from reading
-            {IRemoveFromReadLoading ? ICONS.button_loading_icon : ""}
+            Remove From ReadingList
+            {IRemoveFromReadLoading
+              ? ICONS.button_loading_icon
+              : ICONS.delete_icon}
           </button>
         )}
         {!reading_book && (
           <button
-            className="text-xm text-white px-6 ml-auto py-1 bg-[#000000]  "
+            className="text-[#3C3C3C] font-inter h-full  text-lg font-semibold flex items-center 
+					gap-2"
             onClick={wishListHandler}
           >
-            {isRemoveWisLoading
-              ? ICONS.button_loading_icon
-              : ICONS.heart_fill_icon}
+            Remove From WishList
+            {isRemoveWisLoading ? ICONS.button_loading_icon : ICONS.delete_icon}
           </button>
         )}
       </div>
@@ -183,7 +191,7 @@ const BookCard3 = ({
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className="absolute  top-20 z-50 left-0 right-0 mx-auto flex justify-center"
+          className="absolute  top-0 z-50 left-0 right-0 mx-auto flex justify-center"
         />
       )}
     </div>

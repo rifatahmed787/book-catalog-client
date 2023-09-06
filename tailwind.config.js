@@ -22,6 +22,7 @@ export default {
         primary: "#0AB3A3",
         secondary: "#00D1CD",
         regular: "#ffffff",
+        dark: "#0F172A",
       },
     },
   },

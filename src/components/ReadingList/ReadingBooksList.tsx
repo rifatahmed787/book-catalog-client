@@ -14,7 +14,7 @@ export default function ReadingBooksList() {
     <div className="bg-[#FAF9F5] min-h-[70vh] px-4  py-16 ">
       <div className=" max-w-[1170px] mx-auto">
         {/* Books list  */}
-        {books_lis_data?.lenght > 0 ? (
+        {books_lis_data?.length > 0 ? (
           ""
         ) : (
           <>

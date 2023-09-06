@@ -240,7 +240,7 @@ const Navbar = () => {
                 <ul className="space-y-4 px-4">{menuItems}</ul>
                 {isLoggedIn ? (
                   <>
-                    <ul className=" items-center hidden lg:flex">{account}</ul>
+                    <ul className=" items-center lg:flex">{account}</ul>
                   </>
                 ) : (
                   <Link to="/auth/signup" className="mt-2">
