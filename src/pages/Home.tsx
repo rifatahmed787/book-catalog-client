@@ -1,5 +1,6 @@
 import { DarkModeContext } from "@/components/DarkModeContext/DarkModeContext";
 import BannerSwiper from "@/components/Home/BannerSwiper";
+import ClientReview from "@/components/Home/ClientReview";
 import LatestBooks from "@/components/Home/LatestBooks";
 import { useContext } from "react";
 
@@ -14,8 +15,8 @@ const Home = () => {
         }`}
       >
         <LatestBooks />
+        <ClientReview />
       </div>
-      <div></div>
     </div>
   );
 };
