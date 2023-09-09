@@ -160,7 +160,13 @@ const BookCard3 = ({
           >
             {book.publication_date}
           </p>
-          <p className="font-bold">$ {book.price}</p>
+          <p
+            className={`text-[#3C3C3C] font-inter  text-base font-bold ${
+              darkMode ? "text-gray-300" : ""
+            }`}
+          >
+            $ {book.price}
+          </p>
           <p
             className={`text-[#3C3C3C] font-inter  text-base font-normal ${
               darkMode ? "text-gray-300" : ""
