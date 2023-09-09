@@ -6,6 +6,7 @@ export const apiSlice = createApi({
   reducerPath: "apis",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://book-gallery-backend.vercel.app/api/v1",
+
     prepareHeaders(headers, { getState }) {
       // Access the authentication token from the Redux store
       const authToken = (getState() as RootState).auth.accessToken;
