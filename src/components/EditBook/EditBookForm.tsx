@@ -36,6 +36,7 @@ const EditBookForm = ({ book_details }: { book_details: IBook }) => {
     publisher: "",
     language: "",
     pages: 0,
+    price: 0,
     rating: 0,
     description: "",
     cover_image: "",
@@ -53,6 +54,7 @@ const EditBookForm = ({ book_details }: { book_details: IBook }) => {
       publisher: book_details.publisher,
       language: book_details?.language,
       pages: book_details?.pages,
+      price: book_details?.price,
       rating: book_details?.rating,
       description: book_details?.description,
       cover_image: book_details?.cover_image,
@@ -68,6 +70,7 @@ const EditBookForm = ({ book_details }: { book_details: IBook }) => {
     const book_data = book_form;
     book_data.added_by = user?._id as string;
     book_data.pages = Number(book_data.pages);
+    book_data.price = Number(book_data.price);
     book_data.rating = Number(book_data.rating);
 
     editBook({ bookID: book_details?._id, book_data });
@@ -190,8 +193,19 @@ const EditBookForm = ({ book_details }: { book_details: IBook }) => {
             htmlFor="Pages"
             label="Pages"
           />
-          {/* Rating */}
+          {/* price */}
           <TextInput
+            type="number"
+            placeHolder=""
+            currentValue={book_form.price}
+            onChange={(e) => inputChangeHandler(e, "price")}
+            required={true}
+            id="Price"
+            htmlFor="Price"
+            label="Price"
+          />
+          {/* Rating */}
+          {/* <TextInput
             type="number"
             placeHolder=""
             currentValue={book_form.rating as number}
@@ -200,7 +214,7 @@ const EditBookForm = ({ book_details }: { book_details: IBook }) => {
             id="Rating"
             htmlFor="Rating"
             label="Rating"
-          />
+          /> */}
         </div>
         {/* Description */}
         <TextArea

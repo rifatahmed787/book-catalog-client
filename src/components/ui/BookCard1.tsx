@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 
-const BookCard = ({ book }: { book: IBook }) => {
+const BookCard1 = ({ book }: { book: IBook }) => {
   const { darkMode } = useContext(DarkModeContext);
   const [isLoveHovered, setIsLoveHovered] = useState(false);
   const [isViewHovered, setIsViewHovered] = useState(false);
@@ -277,4 +277,4 @@ const BookCard = ({ book }: { book: IBook }) => {
   );
 };
 
-export default BookCard;
+export default BookCard1;

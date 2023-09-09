@@ -23,6 +23,7 @@ export const apiSlice = createApi({
     "latest_books",
     "wishlist",
     "reading_list",
+    "best_seller",
   ],
 
   endpoints: () => ({}),

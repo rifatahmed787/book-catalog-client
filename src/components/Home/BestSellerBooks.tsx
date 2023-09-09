@@ -1,10 +1,12 @@
-import { useGetLatestBooksQuery } from "@/redux/features/book/bookApi";
-import BookCarousel from "../ui/BooksCarousel";
+import { useGetBestSellerBooksQuery } from "@/redux/features/book/bookApi";
+
 import Button from "../ui/Button";
 import BooksCarouselSkeleton from "./BookCarouselSkeleton";
 import { useNavigate } from "react-router-dom";
+import { IBook } from "@/types/Book";
+import BookCard1 from "../ui/BookCard1";
 
-const LatestBooks = () => {
+const BestsellerBooks = () => {
   const navigate = useNavigate();
   // Get books query
   const {
@@ -12,7 +14,7 @@ const LatestBooks = () => {
     isLoading,
     // isError,
     // error,
-  } = useGetLatestBooksQuery({});
+  } = useGetBestSellerBooksQuery({});
 
   const books_list_data = books?.data;
 
@@ -23,7 +25,7 @@ const LatestBooks = () => {
 			gap-6 sm:gap-20"
       >
         <h1 className="text-primary font-anton text-[20px] md:text-[40px] font-normal leading-[50px] relative after:absolute after:content-normal after:bg-primary after:w-full after:h-0.5 after:bottom-2">
-          Latest books in collection
+          Best Seller Preview
         </h1>
         <Button
           title="All Books"
@@ -35,11 +37,18 @@ const LatestBooks = () => {
         {isLoading ? (
           <BooksCarouselSkeleton />
         ) : (
-          <BookCarousel books_list_data={books_list_data} />
+          <>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-center justify-items-center">
+              {books_list_data?.length &&
+                books_list_data?.map((book: IBook) => (
+                  <BookCard1 book={book} />
+                ))}
+            </div>
+          </>
         )}
       </div>
     </div>
   );
 };
 
-export default LatestBooks;
+export default BestsellerBooks;

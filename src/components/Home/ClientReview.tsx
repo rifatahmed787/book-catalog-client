@@ -47,10 +47,10 @@ const ClientReview = () => {
         >
           <div>
             <h1
-              className="text-primary text-center font-anton text-3xl md:text-6xl  font-normal leading-[70px] md:leading-[140px] letter-spacing 
+              className="text-primary text-center font-anton text-3xl md:text-5xl  font-normal leading-[70px] md:leading-[140px] letter-spacing 
             tracking-[-2.82px]"
             >
-              What Our Client Say
+              What People Say
             </h1>
           </div>
 

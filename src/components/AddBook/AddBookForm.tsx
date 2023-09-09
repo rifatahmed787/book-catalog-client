@@ -39,6 +39,7 @@ const AddBookForm = () => {
     publisher: "",
     language: "",
     pages: 0,
+    price: 0,
     cover_image: "",
     rating: 1,
     description: "",
@@ -57,7 +58,7 @@ const AddBookForm = () => {
 
     let imageUrl = "";
     if (file) {
-      console.log("this is the file data", file);
+      // console.log("this is the file data", file);
       const formData = new FormData();
       formData.append("image", file);
 
@@ -81,6 +82,7 @@ const AddBookForm = () => {
     // the properties of book_data
     book_data.added_by = user?._id as string;
     book_data.pages = Number(book_data.pages);
+    book_data.price = Number(book_data.price);
     book_data.rating = Number(book_data.rating);
 
     // the cover_image property
@@ -194,7 +196,7 @@ const AddBookForm = () => {
         />
 
         {/* Language  & Pages */}
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-3 gap-3">
           {/* Language */}
           <TextInput
             type="text"
@@ -217,6 +219,18 @@ const AddBookForm = () => {
             id="pages"
             htmlFor="pages"
             label="Page Number"
+          />
+
+          {/* Price */}
+          <TextInput
+            type="number"
+            placeHolder=""
+            currentValue={book_form.price}
+            onChange={(e) => inputChangeHandler(e, "price")}
+            required={true}
+            id="price"
+            htmlFor="price"
+            label="price"
           />
         </div>
         {/* Description */}
@@ -291,7 +305,7 @@ const AddBookForm = () => {
           messages={AlertMessages}
           isAlertOpen={isAlertOpen}
           setIsAlertOpen={setIsAlertOpen}
-          className="max-w-xs w-full absolute top-48 right-0 flex justify-center z-50"
+          className="max-w-xs w-full absolute top-0 right-0 flex justify-center z-50"
         />
       )}
     </form>
