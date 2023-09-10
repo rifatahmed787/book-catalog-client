@@ -3,6 +3,7 @@ import BannerSwiper from "@/components/Home/BannerSwiper";
 import BestsellerBooks from "@/components/Home/BestSellerBooks";
 import ClientReview from "@/components/Home/ClientReview";
 import LatestBooks from "@/components/Home/LatestBooks";
+import SectionTwo from "@/components/Home/SectionTwo";
 import { useContext } from "react";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
         }`}
       >
         <LatestBooks />
+        <SectionTwo />
         <BestsellerBooks />
         <ClientReview />
       </div>

@@ -81,7 +81,7 @@ const BannerSwiper = () => {
       >
         {/* Slide 1 */}
         <SwiperSlide>
-          <div className="bannerBG-1 h-[60vh] md:h-[75vh] flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-50 after:h-full after:w-full">
+          <div className="bannerBG-1 h-[65vh] md:h-[70vh] flex items-end relative after:absolute after:content-normal after:bg-black/70 after:opacity-50 after:h-full after:w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 z-10">
               {/* Left Side: Text Area */}
               <div className="flex py-10 items-center justify-center md:justify-start px-10 md:px-20">
@@ -92,8 +92,7 @@ const BannerSwiper = () => {
                       activeSlideIndex === 0 ? "banner-zoom" : ""
                     }`}
                   >
-                    Today a <span className="text-primary">reader, </span>
-                    tomorrow a <span className="text-primary">leader.</span>
+                    Today a reade tomorrow <br />a leader.
                   </h1>
 
                   <article
@@ -133,7 +132,7 @@ const BannerSwiper = () => {
         {/* Slide 2 */}
 
         <SwiperSlide>
-          <div className="bannerBG-2 h-[60vh] md:h-[75vh] flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-50 after:h-full after:w-full">
+          <div className="bannerBG-2 h-[65vh] md:h-[70vh] flex items-end relative after:absolute after:content-normal after:bg-black/70 after:opacity-50 after:h-full after:w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 z-10">
               <div></div>
               {/* Right Side: Text Area */}
@@ -145,9 +144,7 @@ const BannerSwiper = () => {
                       activeSlideIndex === 0 ? "banner-zoom" : ""
                     }`}
                   >
-                    A reader lives a{" "}
-                    <span className="text-primary">thousand </span>
-                    lives before he <span className="text-primary">dies.</span>
+                    A reader lives a thousand lives before he dies.
                   </h1>
 
                   <article
@@ -185,7 +182,7 @@ const BannerSwiper = () => {
 
         {/* Slide 3 */}
         <SwiperSlide>
-          <div className="bannerBG-3 h-[60vh] md:h-[75vh] flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-50 after:h-full after:w-full">
+          <div className="bannerBG-3 h-[65vh] md:h-[70vh] flex items-end relative after:absolute after:content-normal after:bg-black/70 after:opacity-50 after:h-full after:w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 z-10">
               {/* Left Side: Text Area */}
               <div className="flex py-10 items-center justify-center md:justify-start px-10 md:px-20">
@@ -196,8 +193,7 @@ const BannerSwiper = () => {
                       activeSlideIndex === 0 ? "banner-zoom" : ""
                     }`}
                   >
-                    Today a <span className="text-primary">reader, </span>
-                    tomorrow a <span className="text-primary">leader.</span>
+                    Today a reade tomorrow <br />a leader.
                   </h1>
 
                   <article
@@ -236,7 +232,7 @@ const BannerSwiper = () => {
         {/* Slide 4 */}
 
         <SwiperSlide>
-          <div className="bannerBG-4 h-[60vh] md:h-[75vh] flex items-end relative after:absolute after:content-normal after:bg-black after:opacity-50 after:h-full after:w-full">
+          <div className="bannerBG-4 h-[65vh] md:h-[70vh] flex items-end relative after:absolute after:content-normal after:bg-black/70 after:opacity-50 after:h-full after:w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 z-10">
               <div></div>
               {/* Right Side: Text Area */}
@@ -248,9 +244,7 @@ const BannerSwiper = () => {
                       activeSlideIndex === 0 ? "banner-zoom" : ""
                     }`}
                   >
-                    A reader lives a{" "}
-                    <span className="text-primary">thousand </span>
-                    lives before he <span className="text-primary">dies.</span>
+                    A reader lives a thousand lives before he dies.
                   </h1>
 
                   <article
