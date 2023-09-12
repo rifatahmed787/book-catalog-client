@@ -27,7 +27,7 @@ const BookSearchbar = ({
         className="pr-10"
       />
       <button
-        className="hover:bg-primary text-black h-[44px] px-2 py-1  rounded-r-md  hover:text-white -ml-10"
+        className="hover:bg-primary text-black h-[44px] px-2 py-1  rounded-r-md  hover:text-white -ml-10 z-10"
         onClick={() => handleFilterValue(serch_key)}
       >
         <svg

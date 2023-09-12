@@ -56,6 +56,7 @@ export default function BooksList() {
         {/* Filter & and add book button */}
 
         <FilterBook filter={filter} setFilter={setFilter} />
+
         {/* Books list  */}
         {isLoading ? (
           <BookListSkeleton />
