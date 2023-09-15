@@ -5,8 +5,8 @@ import { RootState } from "../store";
 export const apiSlice = createApi({
   reducerPath: "apis",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://book-gallery-backend.vercel.app/api/v1",
-
+    // baseUrl: "https://book-gallery-backend.vercel.app/api/v1",
+    baseUrl: "http://localhost:5000/api/v1",
     prepareHeaders(headers, { getState }) {
       // Access the authentication token from the Redux store
       const authToken = (getState() as RootState).auth.accessToken;
@@ -25,6 +25,7 @@ export const apiSlice = createApi({
     "wishlist",
     "reading_list",
     "best_seller",
+    "cart",
   ],
 
   endpoints: () => ({}),

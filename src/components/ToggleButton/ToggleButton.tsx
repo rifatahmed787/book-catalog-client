@@ -7,7 +7,11 @@ const ToggleButton = () => {
   const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   return (
-    <label className="flex items-center cursor-pointer px-4 my-2 gap-2">
+    <label
+      className={`flex items-center cursor-pointer px-4 my-2 gap-2 ${
+        darkMode ? "hover:bg-gray-800" : ""
+      }`}
+    >
       <div>
         <Icon
           icon={darkMode ? "ph:moon" : "ph:sun"}
@@ -23,7 +27,7 @@ const ToggleButton = () => {
           onChange={toggleDarkMode}
         />
         <div
-          className={`w-12 h-6 bg-brand rounded-full shadow-inner ${
+          className={`w-12 h-6 rounded-full shadow-inner ${
             darkMode ? "bg-white" : ""
           }`}
         ></div>

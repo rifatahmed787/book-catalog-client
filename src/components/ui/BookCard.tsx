@@ -10,6 +10,7 @@ import { useAddBookInReadingListMutation } from "@/redux/features/reading/readin
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
+import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
 
 const BookCard = ({ book }: { book: IBook }) => {
   const { darkMode } = useContext(DarkModeContext);
@@ -44,6 +45,18 @@ const BookCard = ({ book }: { book: IBook }) => {
     },
   ] = useAddBookInReadingListMutation();
 
+  //add to card list mutation
+  const [
+    addToCard,
+    {
+      data: addToCardData,
+      isLoading: isAddToCardLoading,
+      isError: isAddToCardError,
+      error: addToCardError,
+      isSuccess: isAddToCardSuccess,
+    },
+  ] = useAddToCartMutation();
+
   // Alert State
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [AlertType, setAlertType] = useState<"success" | "error" | "warning">(
@@ -54,10 +67,6 @@ const BookCard = ({ book }: { book: IBook }) => {
   //wishListHandler
   const wishListHandler = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
-    console.log("Request Payload:", {
-      book_id: book?._id,
-      user_id: user?._id,
-    });
 
     isLoggedIn
       ? addBookInWish({
@@ -77,6 +86,17 @@ const BookCard = ({ book }: { book: IBook }) => {
       : navigate("/auth/signin");
   };
 
+  //add to cart handler
+  const addToCardHandler = (e: { stopPropagation: () => void }) => {
+    e.stopPropagation();
+    isLoggedIn
+      ? addToCard({
+          book_id: book?._id,
+          user_id: user?._id,
+        })
+      : navigate("/auth/signin");
+  };
+
   //error and success handlaing
   useEffect(() => {
     if (isError && error && "data" in error) {
@@ -90,6 +110,7 @@ const BookCard = ({ book }: { book: IBook }) => {
       setAlertMessages(addToWishData?.message);
     }
   }, [error, isError, isSuccess]);
+
   useEffect(() => {
     if (isAddIntoReadError && addIntoReadError && "data" in addIntoReadError) {
       setIsAlertOpen(true);
@@ -102,6 +123,19 @@ const BookCard = ({ book }: { book: IBook }) => {
       setAlertMessages(addInToReadData?.message);
     }
   }, [isAddIntoReadError, addIntoReadError, isAddIntoReadSuccess]);
+
+  useEffect(() => {
+    if (isAddToCardError && addToCardError && "data" in addToCardError) {
+      setIsAlertOpen(true);
+      setAlertType("error");
+      const error_messages = get_error_messages(addToCardError);
+      setAlertMessages(error_messages);
+    } else if (isAddToCardSuccess) {
+      setIsAlertOpen(true);
+      setAlertType("success");
+      setAlertMessages(addToCardData?.message);
+    }
+  }, [isAddToCardError, addToCardError, isAddToCardSuccess]);
 
   // card Click Handler
   const cardClickHandler = () => {
@@ -264,8 +298,12 @@ const BookCard = ({ book }: { book: IBook }) => {
           Read Now
           {isAddToReadLoading ? ICONS.button_loading_icon : ""}
         </button>
-        <button className="text-xm text-primary hover:text-white hover:bg-primary duration-500 px-6 py-1 border ">
+        <button
+          className="text-xm text-primary hover:text-white hover:bg-primary duration-500 px-6 py-1 border flex items-center gap-2"
+          onClick={addToCardHandler}
+        >
           ADD TO CART
+          {isAddToCardLoading ? ICONS.button_loading_icon : ""}
         </button>
       </div>
 

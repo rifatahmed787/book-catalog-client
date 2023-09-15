@@ -69,26 +69,45 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
             <a
               href="#"
               className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
-                darkMode ? "text-white" : "hover:bg-gray-100"
+                darkMode
+                  ? "text-white hover:text-white hover:bg-gray-800"
+                  : "hover:bg-gray-100"
               }`}
               onClick={() => setAccountDropdownOpen(false)}
             >
-              <Icon icon="material-symbols:dashboard-outline" width={25} />
+              <Icon icon="material-symbols:dashboard-outline" width={20} />
               Dashboard
             </a>
           </li>
 
           {/* shop */}
           <li>
-            <a
-              href="#"
+            <Link
+              to="/cart"
               className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
-                darkMode ? "text-white" : "hover:bg-gray-100"
+                darkMode
+                  ? "text-white hover:text-white hover:bg-gray-800"
+                  : "hover:bg-gray-100"
               }`}
             >
-              <Icon icon="tdesign:shop" width={25} />
+              <Icon icon="tdesign:shop" width={20} />
               Shop
-            </a>
+            </Link>
+          </li>
+
+          {/* checkout */}
+          <li>
+            <Link
+              to="/checkout"
+              className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
+                darkMode
+                  ? "text-white hover:text-white hover:bg-gray-800"
+                  : "hover:bg-gray-100"
+              }`}
+            >
+              <Icon icon="material-symbols:shopping-cart-checkout" width={20} />
+              CheckOut
+            </Link>
           </li>
 
           {/* wishlist */}
@@ -96,12 +115,14 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
             <Link
               to="/wishlist"
               className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
-                darkMode ? "text-white" : "hover:bg-gray-100"
+                darkMode
+                  ? "text-white hover:text-white hover:bg-gray-800"
+                  : "hover:bg-gray-100"
               }`}
             >
               <Icon
                 icon="streamline:interface-favorite-heart-reward-social-rating-media-heart-it-like-favorite-love"
-                width={25}
+                width={20}
               />
               WishList
             </Link>
@@ -112,25 +133,14 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
             <Link
               to="/reading-list"
               className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
-                darkMode ? "text-white" : "hover:bg-gray-100"
+                darkMode
+                  ? "text-white hover:text-white hover:bg-gray-800"
+                  : "hover:bg-gray-100"
               }`}
             >
-              <Icon icon="fluent-mdl2:reading-mode" width={20} />
+              <Icon icon="fluent-mdl2:reading-mode" width={18} />
               Reading List
             </Link>
-          </li>
-
-          {/* checkout */}
-          <li>
-            <a
-              href="#"
-              className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
-                darkMode ? "text-white" : "hover:bg-gray-100"
-              }`}
-            >
-              <Icon icon="material-symbols:shopping-cart-checkout" width={25} />
-              CheckOut
-            </a>
           </li>
 
           {/* settings */}
@@ -138,10 +148,12 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
             <a
               href="#"
               className={`px-4 py-2 text-base w-full text-left text-gray-700  flex items-center gap-2 ${
-                darkMode ? "text-white" : "hover:bg-gray-100"
+                darkMode
+                  ? "text-white hover:text-white hover:bg-gray-800"
+                  : "hover:bg-gray-100"
               }`}
             >
-              <Icon icon="clarity:settings-line" width={25} />
+              <Icon icon="clarity:settings-line" width={20} />
               Settings
             </a>
           </li>
@@ -159,10 +171,12 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
             />
             <h1
               className={`px-4 py-2 text-base w-full text-left text-gray-700 flex items-center gap-2 ${
-                darkMode ? "text-white" : "hover:bg-gray-100 "
+                darkMode
+                  ? "text-white hover:text-white hover:bg-gray-800"
+                  : "hover:bg-gray-100 "
               }`}
             >
-              <Icon icon="material-symbols:language" width={25} />
+              <Icon icon="material-symbols:language" width={20} />
               {isBangla ? "বাংলা" : "English"}
             </h1>
           </div>
@@ -172,11 +186,11 @@ const Account: React.FC<AccountProps> = ({ setAccountDropdownOpen }) => {
         <ToggleButton />
         <button
           onClick={handleLogout}
-          className={`px-4 py-2 text-base w-full text-left text-gray-700    flex items-center gap-2 ${
-            darkMode ? "text-white" : "hover:bg-gray-100"
+          className={`px-4 py-2 text-base w-full text-left text-gray-700 flex items-center gap-2 ${
+            darkMode ? "text-white hover:bg-gray-800" : "hover:bg-gray-100"
           }`}
         >
-          <Icon icon="humbleicons:logout" width={25} />
+          <Icon icon="humbleicons:logout" width={20} />
           Log out
         </button>
       </li>

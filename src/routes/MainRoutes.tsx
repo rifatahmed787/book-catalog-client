@@ -13,6 +13,8 @@ import EditBook from "@/pages/EditBook";
 import WishList from "@/pages/WishList";
 import ReadingList from "@/pages/ReadingList";
 import Contact from "@/pages/Contact";
+import Checkout from "@/components/Shop/CheckOut/Checkout";
+import AddToCart from "@/pages/AddToCart";
 
 export const AllRoutes = createBrowserRouter([
   {
@@ -72,6 +74,22 @@ export const AllRoutes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ReadingList />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/cart",
+        element: (
+          <PrivateRoute>
+            <AddToCart />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: (
+          <PrivateRoute>
+            <Checkout />
           </PrivateRoute>
         ),
       },
