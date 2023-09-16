@@ -10,7 +10,6 @@ import { IBook } from "@/types/Book";
 
 const CartCard = ({ cart_book }: { cart_book?: ICart }) => {
   const book: IBook | undefined = cart_book?.book_id as IBook | undefined;
-  const [quantity, setQuantity] = useState<number>(1);
 
   const { user, isLoggedIn } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -46,18 +45,6 @@ const CartCard = ({ cart_book }: { cart_book?: ICart }) => {
       : navigate("/auth/signin");
   };
 
-  // Function to increase the quantity
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
-
-  // Function to decrease the quantity
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-
   //error and success handlaing
   useEffect(() => {
     if (isError && error && "data" in error) {
@@ -73,7 +60,7 @@ const CartCard = ({ cart_book }: { cart_book?: ICart }) => {
   }, [error, isError, isSuccess, removeFromCartData?.message]);
 
   return (
-    <div className=" mt-10 w-full  grid grid-cols-1   sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 ">
+    <div className=" w-full  grid grid-cols-1   sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 ">
       <div className="flex ">
         <div className="">
           <img className="h-24 w-20" src={book?.cover_image} alt="" />
@@ -92,7 +79,7 @@ const CartCard = ({ cart_book }: { cart_book?: ICart }) => {
       </div>
 
       <div className="flex justify-center items-center">
-        <button onClick={decreaseQuantity}>
+        <button>
           <svg className="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
             <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
           </svg>
@@ -100,17 +87,17 @@ const CartCard = ({ cart_book }: { cart_book?: ICart }) => {
         <input
           className="mx-2 border text-center w-8 px-1 text-black"
           type="text"
-          value={quantity}
+          value="1"
           readOnly
         />
-        <button onClick={increaseQuantity}>
+        <button>
           <svg className="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
             <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
           </svg>
         </button>
       </div>
       <span className="text-center w-2/5 font-semibold text-sm flex justify-center items-center">
-        $ {book?.price !== undefined ? book.price * quantity : "N/A"}
+        $ {book?.price}
       </span>
 
       {/* Toast */}

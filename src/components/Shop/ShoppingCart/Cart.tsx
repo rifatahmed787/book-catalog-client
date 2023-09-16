@@ -3,9 +3,9 @@ import { useContext } from "react";
 import { DarkModeContext } from "@/components/DarkModeContext/DarkModeContext";
 import BrandButton from "@/components/BrandButton/BrandButton";
 import { useGetCartBookQuery } from "@/redux/features/cart/cartApi";
-import BookListSkeleton from "@/components/Books/BookListSkeleton";
 import { ICart } from "@/types/Cart";
 import CartCard from "@/components/ui/CartCard";
+import ShopSkeleton from "../ShopSkeleton/ShopSkeleton";
 
 const Cart = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -52,11 +52,7 @@ const Cart = () => {
               </div>
 
               {/* book details */}
-              <div
-                className={`flex items-center  -mx-8 px-1 lg:px-6 py-5 ${
-                  darkMode ? "hover:bg-none" : "hover:bg-gray-100"
-                }`}
-              >
+              <div className={`flex items-center  -mx-8 px-1 lg:px-6 py-5`}>
                 <div className=" max-w-[1170px] mx-auto">
                   {cart_list_data?.length > 0 ? (
                     ""
@@ -73,14 +69,24 @@ const Cart = () => {
                   )}
 
                   {isLoading ? (
-                    <BookListSkeleton />
+                    <ShopSkeleton />
                   ) : (
                     <>
                       {!isError &&
                         !error &&
                         cart_list_data?.length > 0 &&
                         cart_list_data.map((book: ICart) => {
-                          return <CartCard key={book._id} cart_book={book} />;
+                          return (
+                            <div
+                              className={`mt-8 cursor-pointer ${
+                                darkMode
+                                  ? "hover:bg-none"
+                                  : "hover:bg-gray-100 p-4"
+                              }`}
+                            >
+                              <CartCard key={book._id} cart_book={book} />
+                            </div>
+                          );
                         })}
                     </>
                   )}

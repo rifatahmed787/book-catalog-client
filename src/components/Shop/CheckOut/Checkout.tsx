@@ -1,8 +1,14 @@
 import { useContext } from "react";
 import { DarkModeContext } from "@/components/DarkModeContext/DarkModeContext";
+import CheckOutCard from "@/components/ui/CheckOutCard";
+import { ICart } from "@/types/Cart";
+import { useGetCartBookQuery } from "@/redux/features/cart/cartApi";
+import ShopSkeleton from "../ShopSkeleton/ShopSkeleton";
 
 const Checkout = () => {
   const { darkMode } = useContext(DarkModeContext);
+  const { data: books, isError, isLoading, error } = useGetCartBookQuery({});
+  const cart_list_data = books?.data;
   return (
     <div className={`pb-10 pt-1 ${darkMode ? "bg-black text-white" : ""}`}>
       <h1
@@ -100,103 +106,53 @@ const Checkout = () => {
           darkMode ? "bg-gradient-backdrop rounded-md" : ""
         }`}
       >
-        <div className="px-4 pt-8">
-          <p className="text-xl font-medium">Order Summary</p>
-          <p className="text-gray-400">
-            Check your items. And select a suitable shipping method.
-          </p>
-          <div
-            className={`mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6 ${
-              darkMode ? "bg-gradient-backdrop text-white" : ""
-            }`}
-          >
-            <div className="flex flex-col rounded-lg  sm:flex-row">
-              <img
-                className="m-2 h-24 w-28 rounded-md border object-cover object-center"
-                src="https://images.unsplash.com/flagged/photo-1556637640-2c80d3201be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                alt=""
-              />
-              <div className="flex w-full flex-col px-4 py-4">
-                <span className="font-semibold">
-                  Nike Air Max Pro 8888 - Super Light
-                </span>
-                <span className="float-right text-gray-400">42EU - 8.5US</span>
-                <p className="text-lg font-bold">$138.99</p>
-              </div>
-            </div>
-            <div className="flex flex-col rounded-lg  sm:flex-row">
-              <img
-                className="m-2 h-24 w-28 rounded-md border object-cover object-center"
-                src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                alt=""
-              />
-              <div className="flex w-full flex-col px-4 py-4">
-                <span className="font-semibold">
-                  Nike Air Max Pro 8888 - Super Light
-                </span>
-                <span className="float-right text-gray-400">42EU - 8.5US</span>
-                <p className="mt-auto text-lg font-bold">$238.99</p>
-              </div>
+        <div className=" max-w-[1170px] mx-auto">
+          <div className="px-4 pt-8">
+            <p className="text-xl font-medium">Order Summary</p>
+            <p className="text-gray-400">
+              Check your items. And select a suitable shipping method.
+            </p>
+            <div
+              className={`mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6 ${
+                darkMode ? "bg-gradient-backdrop text-white" : ""
+              }`}
+            >
+              {cart_list_data?.length > 0 ? (
+                ""
+              ) : (
+                <>
+                  <h1
+                    className={`text-xl text-center font-bold ${
+                      darkMode ? "text-gray-300" : ""
+                    }`}
+                  >
+                    Check Out is <span className="text-primary">Empty!</span>
+                  </h1>
+                </>
+              )}
+              {isLoading ? (
+                <ShopSkeleton />
+              ) : (
+                <>
+                  {!isError &&
+                    !error &&
+                    cart_list_data?.length > 0 &&
+                    cart_list_data.map((book: ICart) => {
+                      return (
+                        <div
+                          className={`mt-8 cursor-pointer ${
+                            darkMode ? "hover:bg-none" : "hover:bg-gray-100 p-4"
+                          }`}
+                        >
+                          <CheckOutCard key={book._id} cart_book={book} />
+                        </div>
+                      );
+                    })}
+                </>
+              )}
             </div>
           </div>
-
-          <p className="mt-8 text-lg font-medium">Shipping Methods</p>
-          <form className="mt-5 grid gap-6">
-            <div className="relative">
-              <input
-                className="peer hidden"
-                id="radio_1"
-                type="radio"
-                name="radio"
-                checked
-              />
-              <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-              <label
-                className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
-                htmlFor="radio_1"
-              >
-                <img
-                  className="w-14 object-contain"
-                  src="/images/naorrAeygcJzX0SyNI4Y0.png"
-                  alt=""
-                />
-                <div className="ml-5">
-                  <span className="mt-2 font-semibold">Fedex Delivery</span>
-                  <p className="text-slate-500 text-sm leading-6">
-                    Delivery: 2-4 Days
-                  </p>
-                </div>
-              </label>
-            </div>
-            <div className="relative">
-              <input
-                className="peer hidden"
-                id="radio_2"
-                type="radio"
-                name="radio"
-                checked
-              />
-              <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-              <label
-                className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
-                htmlFor="radio_2"
-              >
-                <img
-                  className="w-14 object-contain"
-                  src="/images/oG8xsl3xsOkwkMsrLGKM4.png"
-                  alt=""
-                />
-                <div className="ml-5">
-                  <span className="mt-2 font-semibold">Fedex Delivery</span>
-                  <p className="text-slate-500 text-sm leading-6">
-                    Delivery: 2-4 Days
-                  </p>
-                </div>
-              </label>
-            </div>
-          </form>
         </div>
-
         <div
           className={`mt-10  px-4 pt-8 lg:mt-0 ${
             darkMode ? "bg-gradient-backdrop text-white" : "bg-gray-50"
@@ -207,43 +163,6 @@ const Checkout = () => {
             Complete your order by providing your payment details.
           </p>
           <div className="">
-            <label
-              htmlFor="email"
-              className="mt-4 mb-2 block text-sm font-medium"
-            >
-              Email
-            </label>
-            <div className="relative">
-              <input
-                type="text"
-                id="email"
-                name="email"
-                className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                placeholder="your.email@gmail.com"
-              />
-              <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                  />
-                </svg>
-              </div>
-            </div>
-            <label
-              htmlFor="card-holder"
-              className="mt-4 mb-2 block text-sm font-medium"
-            >
-              Card Holder
-            </label>
             <div className="relative">
               <input
                 type="text"
