@@ -6,11 +6,11 @@ import ToastContainer from "../ui/Toast";
 import ICONS from "@/shared/AllIcons";
 import { get_error_messages } from "@/lib/error_messages";
 import TextArea from "../ui/form_items/TextArea";
-import FileInput from "../ui/form_items/FileInput";
 import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 import { useCreateBlogMutation } from "@/redux/features/Blog/blogApi";
 import { useAppSelector } from "@/hooks/reduxHook";
+import MultipleFileInput from "../ui/form_items/MultipleFileInput";
 
 const AddBlogForm = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -42,47 +42,47 @@ const AddBlogForm = () => {
   });
 
   // file state
-  const [file, setFile] = useState<File | undefined>();
+  const [files, setFiles] = useState<File[]>([]);
 
   // formSubmitHandler
   const formSubmitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    let imageUrl = "";
-    if (file) {
-      // console.log("this is the file data", file);
+    const imageUrls: string[] = [];
+
+    if (files.length > 0) {
       const formData = new FormData();
-      formData.append("image", file);
+      for (let i = 0; i < files.length; i++) {
+        formData.append("image", files[i]);
+      }
 
       try {
         const uploadResponse = await uploader({ data: formData });
         console.log("this is the url data", uploadResponse);
-        if (uploadResponse) {
-          if ("data" in uploadResponse) {
-            imageUrl = uploadResponse.data.images[0];
-          } else {
-            console.error("Upload error:", uploadResponse.error);
-          }
+        if (uploadResponse && "data" in uploadResponse) {
+          imageUrls.push(...uploadResponse.data.images); // Append the new image URLs to the array
+        } else {
+          console.error("Upload error:", uploadResponse?.error);
         }
       } catch (error) {
         console.error("Error uploading file:", error);
       }
     }
 
-    const book_data = { ...blog_form };
+    const blog_data = { ...blog_form };
 
     // the properties of book_data
-    book_data.added_by_id = user?._id as string;
-    book_data.profile = user?.imageUrl as string;
+    blog_data.added_by_id = user?._id as string;
+    blog_data.profile = user?.imageUrl as string;
 
     // the cover_image property
-    const book_data_with_cover_image = {
-      ...book_data,
-      image: [imageUrl],
+    const blog_data_with_cover_image = {
+      ...blog_data,
+      image: imageUrls,
     };
-    console.log(book_data_with_cover_image);
-    addBlog(book_data_with_cover_image);
+    console.log(blog_data_with_cover_image);
+    addBlog(blog_data_with_cover_image);
     setIsLoading(false);
   };
 
@@ -179,18 +179,21 @@ const AddBlogForm = () => {
       />
 
       {/* Cover Image */}
-      <FileInput
+
+      <MultipleFileInput
         label=""
-        onChange={(selectedFile) => {
-          console.log("Selected file:", selectedFile);
-          setFile(selectedFile);
+        onChange={(selectedFiles) => {
+          if (selectedFiles) {
+            const fileArray = Array.from(selectedFiles);
+            console.log("Selected files:", fileArray);
+            setFiles(fileArray);
+          }
         }}
-        currentFile={file}
+        currentFile={files}
         placeholder="Choose an image"
         required
         id="image"
         htmlFor="image"
-        currentValue={""}
         multiple={true}
       />
 

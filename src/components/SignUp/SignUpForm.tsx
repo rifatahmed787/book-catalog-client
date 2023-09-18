@@ -160,7 +160,6 @@ const SignUpForm = () => {
             id="image"
             htmlFor="image"
             currentValue={""}
-            multiple={false}
           />
 
           {/* Email */}

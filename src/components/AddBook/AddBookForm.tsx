@@ -262,7 +262,6 @@ const AddBookForm = () => {
           id="image"
           htmlFor="image"
           currentValue={""}
-          multiple={false}
         />
 
         {/* Publication Date */}

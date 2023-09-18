@@ -1,23 +1,23 @@
+import React, { useContext, useState } from "react";
 import { DarkModeContext } from "@/components/DarkModeContext/DarkModeContext";
 import { cn } from "@/lib/utils";
-import { useContext, useState } from "react";
 
 type FileInputProps = {
   label?: string;
-  onChange: (file: File | undefined) => void;
-  currentFile?: File | undefined;
+  onChange: (files: FileList | null) => void;
   placeholder: string;
   className?: string;
   required?: boolean;
-  currentValue: string | number;
-  htmlFor?: string;
   id?: string;
+  multiple: boolean;
+  htmlFor?: string;
+  currentFile?: File[];
 };
 
-const FileInput = ({
+const MultipleFileInput = ({
   label,
   onChange,
-
+  multiple,
   placeholder,
   className,
   required,
@@ -39,8 +39,8 @@ const FileInput = ({
   }`;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0] || undefined;
-    onChange(selectedFile);
+    const selectedFiles = e.target.files;
+    onChange(selectedFiles);
   };
 
   return (
@@ -68,9 +68,10 @@ const FileInput = ({
         placeholder={placeholder}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        multiple={multiple}
       />
     </div>
   );
 };
 
-export default FileInput;
+export default MultipleFileInput;
