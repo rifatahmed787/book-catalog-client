@@ -15,6 +15,8 @@ import ReadingList from "@/pages/ReadingList";
 import Contact from "@/pages/Contact";
 import Checkout from "@/components/Shop/CheckOut/Checkout";
 import AddToCart from "@/pages/AddToCart";
+import Blog from "@/pages/Blog";
+import AddBlog from "@/components/AddBlog/AddBlog";
 
 export const AllRoutes = createBrowserRouter([
   {
@@ -38,6 +40,10 @@ export const AllRoutes = createBrowserRouter([
         element: <Books />,
       },
       {
+        path: "/blogs",
+        element: <Blog />,
+      },
+      {
         path: "/contact",
         element: <Contact />,
       },
@@ -58,6 +64,14 @@ export const AllRoutes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddBook />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/add-blog",
+        element: (
+          <PrivateRoute>
+            <AddBlog />
           </PrivateRoute>
         ),
       },

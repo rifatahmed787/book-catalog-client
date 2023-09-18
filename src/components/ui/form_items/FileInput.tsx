@@ -12,12 +12,13 @@ type FileInputProps = {
   currentValue: string | number;
   htmlFor?: string;
   id?: string;
+  multiple: boolean;
 };
 
 const FileInput = ({
   label,
   onChange,
-
+  multiple,
   placeholder,
   className,
   required,
@@ -68,6 +69,7 @@ const FileInput = ({
         placeholder={placeholder}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        multiple={multiple}
       />
     </div>
   );

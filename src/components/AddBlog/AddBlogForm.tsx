@@ -6,21 +6,20 @@ import ToastContainer from "../ui/Toast";
 import ICONS from "@/shared/AllIcons";
 import { get_error_messages } from "@/lib/error_messages";
 import TextArea from "../ui/form_items/TextArea";
-import { useAppSelector } from "@/hooks/reduxHook";
-import { useAddBookMutation } from "@/redux/features/book/bookApi";
-import RatingPicker from "../ui/form_items/RatingPicker";
 import FileInput from "../ui/form_items/FileInput";
 import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
+import { useCreateBlogMutation } from "@/redux/features/Blog/blogApi";
+import { useAppSelector } from "@/hooks/reduxHook";
 
-const AddBookForm = () => {
+const AddBlogForm = () => {
   const { darkMode } = useContext(DarkModeContext);
-  // user details
   const { user } = useAppSelector((state) => state.auth);
+  // user details
   const [isLoading, setIsLoading] = useState(false);
   // Add book mutation hook
-  const [addBok, { data: new_book_data, isError, error, isSuccess }] =
-    useAddBookMutation();
+  const [addBlog, { data: new_book_data, isError, error, isSuccess }] =
+    useCreateBlogMutation();
   const [uploader, { isError: uploadError, error: uploadingError }] =
     useUploderMutation();
 
@@ -32,20 +31,14 @@ const AddBookForm = () => {
   const [AlertMessages, setAlertMessages] = useState("");
 
   // form state
-  const [book_form, setBookForm] = useState({
+  const [blog_form, setBlogForm] = useState({
     title: "",
-    author: "",
-    genre: "",
-    publisher: "",
-    language: "",
-    pages: 0,
-    price: 0,
-    cover_image: "",
-    rating: 1,
+    image: [""],
     description: "",
-    keynotes: [""],
-    publication_date: "",
-    added_by: "",
+    tags: [""],
+    added_by_id: "",
+    name: "",
+    profile: "",
   });
 
   // file state
@@ -77,21 +70,19 @@ const AddBookForm = () => {
       }
     }
 
-    const book_data = { ...book_form };
+    const book_data = { ...blog_form };
 
     // the properties of book_data
-    book_data.added_by = user?._id as string;
-    book_data.pages = Number(book_data.pages);
-    book_data.price = Number(book_data.price);
-    book_data.rating = Number(book_data.rating);
+    book_data.added_by_id = user?._id as string;
+    book_data.profile = user?.imageUrl as string;
 
     // the cover_image property
     const book_data_with_cover_image = {
       ...book_data,
-      cover_image: imageUrl,
+      image: [imageUrl],
     };
-
-    addBok(book_data_with_cover_image);
+    console.log(book_data_with_cover_image);
+    addBlog(book_data_with_cover_image);
     setIsLoading(false);
   };
 
@@ -102,13 +93,13 @@ const AddBookForm = () => {
       | React.ChangeEvent<HTMLTextAreaElement>,
     key: string
   ) => {
-    if (key == "keynotes") {
-      setBookForm((prev) => ({
+    if (key == "tags") {
+      setBlogForm((prev) => ({
         ...prev,
         [key]: e.target.value.split(","),
       }));
     } else {
-      setBookForm((prev) => ({
+      setBlogForm((prev) => ({
         ...prev,
         [key]: e.target.value,
       }));
@@ -146,148 +137,62 @@ const AddBookForm = () => {
         className="text-primary font-anton text-[20px] md:text-[30px] font-normal 
                       leading-[30px] md:leading-[50px] letter-spacing text-center"
       >
-        Add new book
+        Add new Blog
       </h1>
       <div className="space-y-6 block relative">
         {/* Title */}
         <TextInput
           type="text"
           placeHolder=""
-          currentValue={book_form.title}
+          currentValue={blog_form.title}
           onChange={(e) => inputChangeHandler(e, "title")}
           required={true}
           id="title"
           htmlFor="title"
           label="Title"
         />
-        {/* Author */}
         <TextInput
           type="text"
           placeHolder=""
-          currentValue={book_form.author}
-          onChange={(e) => inputChangeHandler(e, "author")}
+          currentValue={blog_form.name}
+          onChange={(e) => inputChangeHandler(e, "name")}
           required={true}
-          id="author"
-          htmlFor="author"
-          label="Author"
-        />
-        {/* Genre */}
-        <TextInput
-          type="text"
-          placeHolder=""
-          currentValue={book_form.genre}
-          onChange={(e) => inputChangeHandler(e, "genre")}
-          required={true}
-          id="genre"
-          htmlFor="genre"
-          label="Genre"
-        />
-
-        {/* Publisher */}
-        <TextInput
-          type="text"
-          placeHolder=""
-          currentValue={book_form.publisher}
-          onChange={(e) => inputChangeHandler(e, "publisher")}
-          required={true}
-          id="publisher"
-          htmlFor="publisher"
-          label="Publisher"
-        />
-
-        {/* Language  & Pages */}
-        <div className="grid grid-cols-3 gap-3">
-          {/* Language */}
-          <TextInput
-            type="text"
-            placeHolder=""
-            currentValue={book_form.language}
-            onChange={(e) => inputChangeHandler(e, "language")}
-            required={true}
-            id="language"
-            htmlFor="language"
-            label="Language"
-          />
-
-          {/* Pages */}
-          <TextInput
-            type="number"
-            placeHolder=""
-            currentValue={book_form.pages}
-            onChange={(e) => inputChangeHandler(e, "pages")}
-            required={true}
-            id="pages"
-            htmlFor="pages"
-            label="Page Number"
-          />
-
-          {/* Price */}
-          <TextInput
-            type="number"
-            placeHolder=""
-            currentValue={book_form.price}
-            onChange={(e) => inputChangeHandler(e, "price")}
-            required={true}
-            id="price"
-            htmlFor="price"
-            label="price"
-          />
-        </div>
-        {/* Description */}
-        <TextArea
-          placeHolder="Description"
-          currentValue={book_form.description}
-          onChange={(e) => inputChangeHandler(e, "description")}
-          required={true}
-        />
-        {/* key_notes */}
-
-        <TextArea
-          placeHolder="Key notes; Note: By comma separator, you can add multiple notes"
-          currentValue={book_form.keynotes.join(",")}
-          onChange={(e) => inputChangeHandler(e, "keynotes")}
-          required={true}
-        />
-
-        {/* Cover Image */}
-        <FileInput
-          label=""
-          onChange={(selectedFile) => {
-            console.log("Selected file:", selectedFile);
-            setFile(selectedFile);
-          }}
-          currentFile={file}
-          placeholder="Choose an image"
-          required
-          id="image"
-          htmlFor="image"
-          currentValue={""}
-          multiple={false}
-        />
-
-        {/* Publication Date */}
-        <TextInput
-          type="date"
-          placeHolder=""
-          currentValue={book_form.publication_date}
-          onChange={(e) => inputChangeHandler(e, "publication_date")}
-          required={true}
-          id="publicationdate"
-          htmlFor="publicationdate"
-          label="Publication Date"
-        />
-
-        {/* Rating */}
-        <RatingPicker
-          current_value={book_form.rating}
-          clickHandler={(value) =>
-            setBookForm((prev) => ({
-              ...prev,
-              ["rating"]: Number(value),
-            }))
-          }
+          id="name"
+          htmlFor="name"
+          label="Your Name"
         />
       </div>
+      {/* Description */}
+      <TextArea
+        placeHolder="Description"
+        currentValue={blog_form.description}
+        onChange={(e) => inputChangeHandler(e, "description")}
+        required={true}
+      />
+      {/* key_notes */}
+
+      <TextArea
+        placeHolder="Key tags; Note: By comma separator, you can add multiple tags"
+        currentValue={blog_form.tags.join(",")}
+        onChange={(e) => inputChangeHandler(e, "tags")}
+        required={true}
+      />
+
+      {/* Cover Image */}
+      <FileInput
+        label=""
+        onChange={(selectedFile) => {
+          console.log("Selected file:", selectedFile);
+          setFile(selectedFile);
+        }}
+        currentFile={file}
+        placeholder="Choose an image"
+        required
+        id="image"
+        htmlFor="image"
+        currentValue={""}
+        multiple={true}
+      />
 
       {/* Submit button */}
       <Button
@@ -313,4 +218,4 @@ const AddBookForm = () => {
   );
 };
 
-export default AddBookForm;
+export default AddBlogForm;

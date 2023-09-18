@@ -79,6 +79,19 @@ const Navbar = () => {
           </div>
         </li>
       </Link>
+      {/* ......................blogs ............ */}
+      <Link to="/blogs" className="font-bold text-white">
+        <li
+          onClick={() => handleMenuClick("/blogs")}
+          className={`menu-item py-3 md:py-5 px-3 ${
+            activeMenu === "/blogs" ? "active" : ""
+          }`}
+        >
+          <div className="flex group cursor-pointer items-center py-1">
+            <span>{isBangla ? "ব্লগ" : "Blog"}</span>
+          </div>
+        </li>
+      </Link>
       {/* ......................contact dropdown ............ */}
       <Link to="/contact" className="font-bold text-white">
         <li

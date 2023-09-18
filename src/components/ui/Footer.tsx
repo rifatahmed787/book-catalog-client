@@ -63,7 +63,7 @@ const Footer = () => {
 
   return (
     <div
-      className={`bg-[#bfc2b6] w-full  min-h-[370px] py-[35px]  md:py-[70px] ${
+      className={`bg-[#bfc2b6] w-full  min-h-[370px] py-[35px] rounded-tl-[200px]  md:py-[70px] ${
         darkMode ? "bg-dark" : ""
       }`}
     >

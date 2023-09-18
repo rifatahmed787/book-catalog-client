@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div className="bg-[#EBE9E1] min-h-screen w-full flex flex-col  ">
+    <div className="min-h-screen w-full flex flex-col  ">
       {/* Header */}
 
       <div>
@@ -18,7 +18,7 @@ const MainLayout = () => {
       <div className="flex-grow">{<Outlet />}</div>
 
       {/* footer */}
-      <div className="mt-auto">
+      <div className="mt-auto ">
         <Footer />
       </div>
     </div>
