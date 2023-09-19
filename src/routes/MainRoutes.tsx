@@ -17,6 +17,7 @@ import Checkout from "@/components/Shop/CheckOut/Checkout";
 import AddToCart from "@/pages/AddToCart";
 import Blog from "@/pages/Blog";
 import AddBlog from "@/components/AddBlog/AddBlog";
+import ErrorPage from "@/components/Error/ErrorPage";
 
 export const AllRoutes = createBrowserRouter([
   {
@@ -111,7 +112,7 @@ export const AllRoutes = createBrowserRouter([
 
     errorElement: (
       <div className="mt-20">
-        {/* <ErrorUI message=" Sorry , There have not any page with this url " /> */}
+        <ErrorPage />
       </div>
     ),
   },
